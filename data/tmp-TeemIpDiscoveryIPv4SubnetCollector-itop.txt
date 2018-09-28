@@ -1,0 +1,351 @@
+Array
+(
+    [name] => TeemIp IPv4 Subnet Discovery - FFF3_60D8_FEE6_520D
+    [description] => Update of IPv4 subnets by TeemIp Discovery Application
+    [status] => production
+    [user_id] => 1
+    [notify_contact_id] => 0
+    [scope_class] => IPv4Subnet
+    [database_table_name] => synchro_data_ipv4subnet_FFF3_60D8_FEE6_520D
+    [scope_restriction] => 
+    [full_load_periodicity] => 0
+    [reconciliation_policy] => use_attributes
+    [action_on_zero] => error
+    [action_on_one] => update
+    [action_on_multiple] => error
+    [delete_policy] => ignore
+    [delete_policy_update] => 
+    [delete_policy_retention] => 0
+    [attribute_list] => Array
+        (
+            [0] => Array
+                (
+                    [attcode] => alarm_water_mark
+                    [update] => 0
+                    [reconcile] => 0
+                    [update_policy] => master_locked
+                    [finalclass] => SynchroAttribute
+                    [friendlyname] => alarm_water_mark
+                )
+
+            [1] => Array
+                (
+                    [attcode] => allocation_date
+                    [update] => 0
+                    [reconcile] => 0
+                    [update_policy] => master_locked
+                    [finalclass] => SynchroAttribute
+                    [friendlyname] => allocation_date
+                )
+
+            [2] => Array
+                (
+                    [attcode] => block_id
+                    [update] => 0
+                    [reconcile] => 0
+                    [update_policy] => master_locked
+                    [reconciliation_attcode] => 
+                    [finalclass] => SynchroAttExtKey
+                    [friendlyname] => block_id
+                )
+
+            [3] => Array
+                (
+                    [attcode] => broadcastip
+                    [update] => 0
+                    [reconcile] => 0
+                    [update_policy] => master_locked
+                    [finalclass] => SynchroAttribute
+                    [friendlyname] => broadcastip
+                )
+
+            [4] => Array
+                (
+                    [attcode] => comment
+                    [update] => 0
+                    [reconcile] => 0
+                    [update_policy] => master_locked
+                    [finalclass] => SynchroAttribute
+                    [friendlyname] => comment
+                )
+
+            [5] => Array
+                (
+                    [attcode] => contact_list
+                    [update] => 0
+                    [reconcile] => 0
+                    [update_policy] => master_locked
+                    [row_separator] => |
+                    [attribute_separator] => ;
+                    [value_separator] => :
+                    [attribute_qualifier] => '
+                    [finalclass] => SynchroAttLinkSet
+                    [friendlyname] => contact_list
+                )
+
+            [6] => Array
+                (
+                    [attcode] => document_list
+                    [update] => 0
+                    [reconcile] => 0
+                    [update_policy] => master_locked
+                    [row_separator] => |
+                    [attribute_separator] => ;
+                    [value_separator] => :
+                    [attribute_qualifier] => '
+                    [finalclass] => SynchroAttLinkSet
+                    [friendlyname] => document_list
+                )
+
+            [7] => Array
+                (
+                    [attcode] => gatewayip
+                    [update] => 0
+                    [reconcile] => 0
+                    [update_policy] => master_locked
+                    [finalclass] => SynchroAttribute
+                    [friendlyname] => gatewayip
+                )
+
+            [8] => Array
+                (
+                    [attcode] => ip
+                    [update] => 0
+                    [reconcile] => 1
+                    [update_policy] => master_locked
+                    [finalclass] => SynchroAttribute
+                    [friendlyname] => ip
+                )
+
+            [9] => Array
+                (
+                    [attcode] => ip_occupancy
+                    [update] => 0
+                    [reconcile] => 0
+                    [update_policy] => master_locked
+                    [finalclass] => SynchroAttribute
+                    [friendlyname] => ip_occupancy
+                )
+
+            [10] => Array
+                (
+                    [attcode] => ipdiscovery_id
+                    [update] => 0
+                    [reconcile] => 0
+                    [update_policy] => master_locked
+                    [reconciliation_attcode] => 
+                    [finalclass] => SynchroAttExtKey
+                    [friendlyname] => ipdiscovery_id
+                )
+
+            [11] => Array
+                (
+                    [attcode] => iplookup_duration
+                    [update] => 1
+                    [reconcile] => 0
+                    [update_policy] => master_locked
+                    [finalclass] => SynchroAttribute
+                    [friendlyname] => iplookup_duration
+                )
+
+            [12] => Array
+                (
+                    [attcode] => iplookup_enabled
+                    [update] => 0
+                    [reconcile] => 0
+                    [update_policy] => master_locked
+                    [finalclass] => SynchroAttribute
+                    [friendlyname] => iplookup_enabled
+                )
+
+            [13] => Array
+                (
+                    [attcode] => last_discovery_date
+                    [update] => 1
+                    [reconcile] => 0
+                    [update_policy] => master_locked
+                    [finalclass] => SynchroAttribute
+                    [friendlyname] => last_discovery_date
+                )
+
+            [14] => Array
+                (
+                    [attcode] => location_list
+                    [update] => 0
+                    [reconcile] => 0
+                    [update_policy] => master_locked
+                    [row_separator] => |
+                    [attribute_separator] => ;
+                    [value_separator] => :
+                    [attribute_qualifier] => '
+                    [finalclass] => SynchroAttLinkSet
+                    [friendlyname] => location_list
+                )
+
+            [15] => Array
+                (
+                    [attcode] => mask
+                    [update] => 0
+                    [reconcile] => 0
+                    [update_policy] => master_locked
+                    [finalclass] => SynchroAttribute
+                    [friendlyname] => mask
+                )
+
+            [16] => Array
+                (
+                    [attcode] => name
+                    [update] => 0
+                    [reconcile] => 0
+                    [update_policy] => master_locked
+                    [finalclass] => SynchroAttribute
+                    [friendlyname] => name
+                )
+
+            [17] => Array
+                (
+                    [attcode] => org_id
+                    [update] => 0
+                    [reconcile] => 1
+                    [update_policy] => master_locked
+                    [reconciliation_attcode] => 
+                    [finalclass] => SynchroAttExtKey
+                    [friendlyname] => org_id
+                )
+
+            [18] => Array
+                (
+                    [attcode] => ping_duration
+                    [update] => 1
+                    [reconcile] => 0
+                    [update_policy] => master_locked
+                    [finalclass] => SynchroAttribute
+                    [friendlyname] => ping_duration
+                )
+
+            [19] => Array
+                (
+                    [attcode] => ping_enabled
+                    [update] => 0
+                    [reconcile] => 0
+                    [update_policy] => master_locked
+                    [finalclass] => SynchroAttribute
+                    [friendlyname] => ping_enabled
+                )
+
+            [20] => Array
+                (
+                    [attcode] => range_occupancy
+                    [update] => 0
+                    [reconcile] => 0
+                    [update_policy] => master_locked
+                    [finalclass] => SynchroAttribute
+                    [friendlyname] => range_occupancy
+                )
+
+            [21] => Array
+                (
+                    [attcode] => release_date
+                    [update] => 0
+                    [reconcile] => 0
+                    [update_policy] => master_locked
+                    [finalclass] => SynchroAttribute
+                    [friendlyname] => release_date
+                )
+
+            [22] => Array
+                (
+                    [attcode] => requestor_id
+                    [update] => 0
+                    [reconcile] => 0
+                    [update_policy] => master_locked
+                    [reconciliation_attcode] => 
+                    [finalclass] => SynchroAttExtKey
+                    [friendlyname] => requestor_id
+                )
+
+            [23] => Array
+                (
+                    [attcode] => scan_duration
+                    [update] => 1
+                    [reconcile] => 0
+                    [update_policy] => master_locked
+                    [finalclass] => SynchroAttribute
+                    [friendlyname] => scan_duration
+                )
+
+            [24] => Array
+                (
+                    [attcode] => scan_enabled
+                    [update] => 0
+                    [reconcile] => 0
+                    [update_policy] => master_locked
+                    [finalclass] => SynchroAttribute
+                    [friendlyname] => scan_enabled
+                )
+
+            [25] => Array
+                (
+                    [attcode] => status
+                    [update] => 0
+                    [reconcile] => 0
+                    [update_policy] => master_locked
+                    [finalclass] => SynchroAttribute
+                    [friendlyname] => status
+                )
+
+            [26] => Array
+                (
+                    [attcode] => type
+                    [update] => 0
+                    [reconcile] => 0
+                    [update_policy] => master_locked
+                    [finalclass] => SynchroAttribute
+                    [friendlyname] => type
+                )
+
+            [27] => Array
+                (
+                    [attcode] => vlans_list
+                    [update] => 0
+                    [reconcile] => 0
+                    [update_policy] => master_locked
+                    [row_separator] => |
+                    [attribute_separator] => ;
+                    [value_separator] => :
+                    [attribute_qualifier] => '
+                    [finalclass] => SynchroAttLinkSet
+                    [friendlyname] => vlans_list
+                )
+
+            [28] => Array
+                (
+                    [attcode] => vrfs_list
+                    [update] => 0
+                    [reconcile] => 0
+                    [update_policy] => master_locked
+                    [row_separator] => |
+                    [attribute_separator] => ;
+                    [value_separator] => :
+                    [attribute_qualifier] => '
+                    [finalclass] => SynchroAttLinkSet
+                    [friendlyname] => vrfs_list
+                )
+
+            [29] => Array
+                (
+                    [attcode] => write_reason
+                    [update] => 0
+                    [reconcile] => 0
+                    [update_policy] => master_locked
+                    [finalclass] => SynchroAttribute
+                    [friendlyname] => write_reason
+                )
+
+        )
+
+    [user_delete_policy] => everybody
+    [url_icon] => 
+    [url_application] => 
+    [notify_contact_id_obsolescence_flag] => 
+)

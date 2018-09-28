@@ -1,0 +1,2 @@
+primary_key;ip;org_id;last_discovery_date;ping_duration;iplookup_duration;scan_duration
+192.168.10.0;192.168.10.0;3;"2018-09-19 18:54:23";229;8;255
