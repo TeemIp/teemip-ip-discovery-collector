@@ -16,7 +16,7 @@
 
 SetupWebPage::AddModule(
 	__FILE__, // Path to the current file, all other file names are relative to the directory containing this file
-	'teemip-ip-discovery-collector/0.2.0',
+	'teemip-ip-discovery-collector/0.3.0',
 	array(
 		// Identification
 		//
