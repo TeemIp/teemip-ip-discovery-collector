@@ -342,24 +342,46 @@ class TeemIpDiscoveryIPv4Collector extends Collector
 					{
 						$LookupResult = exec("dig -x $sIp", $aOutput, $sStatus);
 					}
-					if (strpos($aOutput[4], 'NOERROR') !== FALSE)
+					// Look for the "Got answer section"
+					$aAnswerPosition = array_keys($aOutput, ";; Got answer:");
+					if (!empty($aAnswerPosition))
 					{
-						$bIPResolves = true;
+						$iErrorIndex = $aAnswerPosition[0] + 1;
+						if (strpos($aOutput[$iErrorIndex], 'NOERROR') !== FALSE)
+						{
+							$bIPResolves = true;
+						}
 					}
 					elseif ($this->sDNS2 != '')
 					{
 						$LookupResult = exec("dig -x $sIp @$this->sDNS2", $aOutput, $sStatus);
-						if (strpos($aOutput[4], 'NOERROR') !== FALSE)
+						// Look for the "Got answer section"
+						$aAnswerPosition = array_keys($aOutput, ";; Got answer:");
+						if (!empty($aAnswerPosition))
 						{
-							$bIPResolves = true;
+							$iErrorIndex = $aAnswerPosition[0] + 1;
+							if (strpos($aOutput[$iErrorIndex], 'NOERROR') !== FALSE)
+							{
+								$bIPResolves = true;
+							}
 						}
 					}
 						
 					if ($bIPResolves)
 					{
 						// IP resolves
-						$sName = substr($aOutput[13], strpos($aOutput[13], 'PTR') + 3);
-						$sName = ltrim($sName);
+						// Look for the name in the "Answer" section
+ 						$aAnswerPosition = array_keys($aOutput, ";; ANSWER SECTION:");
+						if (!empty($aAnswerPosition))
+						{
+							$iNameIndex = $aAnswerPosition[0] + 1;
+							$sName = substr($aOutput[$iNameIndex], strpos($aOutput[$iNameIndex], 'PTR') + 3);
+							$sName = ltrim($sName);
+						}
+						else
+						{
+							$sName = '';
+						}
 						if (array_key_exists($sIp, $this->aIPv4))
 						{
 							// Change data anyway as time stamp changes
