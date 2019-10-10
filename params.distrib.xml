@@ -18,9 +18,9 @@
 	</json_placeholders>
 
 	<!-- IP Addresses Parameters -->
-	<ip_default_org_id>Demo</ip_default_org_id>
 	<ip_default_status>unassigned</ip_default_status>
-	
+	<ip_default_view></ip_default_view>
+
 	<!-- Absolute path for ping command - "ping" will be executed with no path if not provided-->
 	<ping_absolute_path></ping_absolute_path>
 	<!-- Absolute path for dig command - "dig" will be executed with no path if not provided-->

@@ -36,13 +36,16 @@ class TeemIpDiscoveryIPv4SubnetCollector extends Collector
 		$index = 0;
 		foreach ($aIPv4SubnetsList as $sSubnetIp => $aIPv4Subnet)
 		{
-			self::$aIPv4Subnet[$index]['ip'] = $sSubnetIp;
-			self::$aIPv4Subnet[$index]['org_id'] = $aIPv4Subnet['org_id'];
-			self::$aIPv4Subnet[$index]['last_discovery_date'] = $aIPv4Subnet['last_discovery_date'];
-			self::$aIPv4Subnet[$index]['ping_duration'] = $aIPv4Subnet['ping_duration'];
-			self::$aIPv4Subnet[$index]['iplookup_duration'] = $aIPv4Subnet['iplookup_duration'];
-			self::$aIPv4Subnet[$index]['scan_duration'] = $aIPv4Subnet['scan_duration'];
-			$index++;
+			if ($aIPv4Subnet['ipdiscovery_enabled'])
+			{
+				self::$aIPv4Subnet[$index]['ip'] = $sSubnetIp;
+				self::$aIPv4Subnet[$index]['org_id'] = $aIPv4Subnet['org_id'];
+				self::$aIPv4Subnet[$index]['last_discovery_date'] = $aIPv4Subnet['last_discovery_date'];
+				self::$aIPv4Subnet[$index]['ping_duration'] = $aIPv4Subnet['ping_duration'];
+				self::$aIPv4Subnet[$index]['iplookup_duration'] = $aIPv4Subnet['iplookup_duration'];
+				self::$aIPv4Subnet[$index]['scan_duration'] = $aIPv4Subnet['scan_duration'];
+				$index++;
+			}
 		}
 
 	}
