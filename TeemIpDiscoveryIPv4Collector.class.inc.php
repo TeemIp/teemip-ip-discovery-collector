@@ -266,15 +266,15 @@ class TeemIpDiscoveryIPv4Collector extends Collector
 					{
 						$aIPAttributes = $aData['fields'];
 						$sIp = $aIPAttributes['ip'];
-						$this->aIPv4[$sIp]['synchro_data']['primary_key'] 			= $sIp;
-						$this->aIPv4[$sIp]['synchro_data']['ip']           			= $sIp;
-						$this->aIPv4[$sIp]['synchro_data']['org_id']				= $aIPAttributes['org_id'];
-						$this->aIPv4[$sIp]['synchro_data']['status']				= $aIPAttributes['status'];
-						$this->aIPv4[$sIp]['synchro_data']['view_name']             = ($this->bZoneMgmtIsInstalled) ? $aIPAttributes['view_name'] : '';
-						$this->aIPv4[$sIp]['synchro_data']['responds_to_ping']		= $aIPAttributes['responds_to_ping'];
-						$this->aIPv4[$sIp]['synchro_data']['responds_to_iplookup']	= $aIPAttributes['responds_to_iplookup'];
-						$this->aIPv4[$sIp]['synchro_data']['fqdn_from_iplookup']	= $aIPAttributes['fqdn_from_iplookup'];
-						$this->aIPv4[$sIp]['synchro_data']['responds_to_scan']		= $aIPAttributes['responds_to_scan'];
+						$this->aIPv4[$sIp]['synchro_data']['primary_key']           = $sIp;
+						$this->aIPv4[$sIp]['synchro_data']['ip']                    = $sIp;
+						$this->aIPv4[$sIp]['synchro_data']['org_id']                = $aIPAttributes['org_id'];
+						$this->aIPv4[$sIp]['synchro_data']['status']                = $aIPAttributes['status'];
+						$this->aIPv4[$sIp]['synchro_data']['view_id']               = ($this->bZoneMgmtIsInstalled) ? $aIPAttributes['view_name'] : '';
+						$this->aIPv4[$sIp]['synchro_data']['responds_to_ping']      = $aIPAttributes['responds_to_ping'];
+						$this->aIPv4[$sIp]['synchro_data']['responds_to_iplookup']  = $aIPAttributes['responds_to_iplookup'];
+						$this->aIPv4[$sIp]['synchro_data']['fqdn_from_iplookup']    = $aIPAttributes['fqdn_from_iplookup'];
+						$this->aIPv4[$sIp]['synchro_data']['responds_to_scan']      = $aIPAttributes['responds_to_scan'];
 						$this->aIPv4[$sIp]['has_changed'] = false;
 									
 						Utils::Log(LOG_DEBUG, "IP: ".$sIp);
