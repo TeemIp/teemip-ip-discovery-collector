@@ -58,8 +58,14 @@ class TeemIpDiscoveryIPv4Collector extends Collector
 		}
 		catch(Exception $e)
 		{
-			$sMessage = 'TeemIp Zone Management extension is NOT installed';
+            $sMessage = 'TeemIp is considered as NOT installed due to below issue: ' . $e->getMessage();
+            if(is_a($e, "IOException"))
+            {
+                Utils::Log(LOG_ERR, $sMessage);
+                throw $e;
+            }
 		}
+
 		Utils::Log(LOG_INFO, $sMessage);
 
 		$this->iIndex = 0;
