@@ -17,8 +17,10 @@
 
 require_once(APPROOT.'collectors/TeemIpDiscoveryIPv4Collector.class.inc.php');
 require_once(APPROOT.'collectors/TeemIpDiscoveryIPv4SubnetCollector.class.inc.php');
+require_once(APPROOT.'collectors/TeemIpDiscoveryIPApplicationCollector.class.inc.php');
 
 $index = 1;
 Orchestrator::AddCollector($index++, 'TeemIpDiscoveryIPv4Collector');
 Orchestrator::AddCollector($index++, 'TeemIpDiscoveryIPv4SubnetCollector');
+Orchestrator::AddCollector($index++, 'TeemIpDiscoveryIPApplicationCollector');
 
