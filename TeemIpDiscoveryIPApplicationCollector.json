@@ -1,0 +1,234 @@
+{
+	"name": "TeemIp Discovery Application - $discovery_application_uuid$",
+	"description": "Operations parameters update for TeemIp Discovery Application with UUID $discovery_application_uuid$",
+	"status": "production",
+	"user_id": "$synchro_user$",
+	"notify_contact_id": "$contact_to_notify$",
+	"scope_class": "IPDiscovery",
+	"database_table_name": "synchro_data_ipapplication_$discovery_application_uuid$",
+	"scope_restriction": "",
+	"full_load_periodicity": "0",
+	"reconciliation_policy": "use_attributes",
+	"action_on_zero": "create",
+	"action_on_one": "update",
+	"action_on_multiple": "error",
+	"delete_policy": "ignore",
+	"delete_policy_update": "",
+	"delete_policy_retention": "0",
+	"attribute_list": [
+		{
+			"attcode": "applicationsolution_list",
+			"update": "0",
+			"reconcile": "0",
+			"update_policy": "master_locked",
+			"row_separator": "|",
+			"attribute_separator": ";",
+			"value_separator": ":",
+			"attribute_qualifier": "'",
+			"finalclass": "SynchroAttLinkSet",
+			"friendlyname": "applicationsolution_list"
+		},
+		{
+			"attcode": "business_criticity",
+			"update": "0",
+			"reconcile": "0",
+			"update_policy": "master_locked",
+			"finalclass": "SynchroAttribute",
+			"friendlyname": "business_criticity"
+		},
+		{
+			"attcode": "contacts_list",
+			"update": "0",
+			"reconcile": "0",
+			"update_policy": "master_locked",
+			"row_separator": "|",
+			"attribute_separator": ";",
+			"value_separator": ":",
+			"attribute_qualifier": "'",
+			"finalclass": "SynchroAttLinkSet",
+			"friendlyname": "contacts_list"
+		},
+		{
+			"attcode": "description",
+			"update": "0",
+			"reconcile": "0",
+			"update_policy": "master_locked",
+			"finalclass": "SynchroAttribute",
+			"friendlyname": "description"
+		},
+		{
+			"attcode": "dns1",
+			"update": "0",
+			"reconcile": "0",
+			"update_policy": "master_locked",
+			"finalclass": "SynchroAttribute",
+			"friendlyname": "dns1"
+		},
+		{
+			"attcode": "dns2",
+			"update": "0",
+			"reconcile": "0",
+			"update_policy": "master_locked",
+			"finalclass": "SynchroAttribute",
+			"friendlyname": "dns2"
+		},
+		{
+			"attcode": "documents_list",
+			"update": "0",
+			"reconcile": "0",
+			"update_policy": "master_locked",
+			"row_separator": "|",
+			"attribute_separator": ";",
+			"value_separator": ":",
+			"attribute_qualifier": "'",
+			"finalclass": "SynchroAttLinkSet",
+			"friendlyname": "documents_list"
+		},
+		{
+			"attcode": "duration",
+			"update": "1",
+			"reconcile": "0",
+			"update_policy": "master_locked",
+			"finalclass": "SynchroAttribute",
+			"friendlyname": "duration"
+		},
+		{
+			"attcode": "iplookup_enabled",
+			"update": "0",
+			"reconcile": "0",
+			"update_policy": "master_locked",
+			"finalclass": "SynchroAttribute",
+			"friendlyname": "iplookup_enabled"
+		},
+		{
+			"attcode": "last_discovery_date",
+			"update": "1",
+			"reconcile": "0",
+			"update_policy": "master_locked",
+			"finalclass": "SynchroAttribute",
+			"friendlyname": "last_discovery_date"
+		},
+		{
+			"attcode": "location_id",
+			"update": "0",
+			"reconcile": "0",
+			"update_policy": "master_locked",
+			"reconciliation_attcode": "",
+			"finalclass": "SynchroAttExtKey",
+			"friendlyname": "location_id"
+		},
+		{
+			"attcode": "move2production",
+			"update": "0",
+			"reconcile": "0",
+			"update_policy": "master_locked",
+			"finalclass": "SynchroAttribute",
+			"friendlyname": "move2production"
+		},
+		{
+			"attcode": "name",
+			"update": "0",
+			"reconcile": "0",
+			"update_policy": "master_locked",
+			"finalclass": "SynchroAttribute",
+			"friendlyname": "name"
+		},
+		{
+			"attcode": "org_id",
+			"update": "0",
+			"reconcile": "0",
+			"update_policy": "master_locked",
+			"reconciliation_attcode": "",
+			"finalclass": "SynchroAttExtKey",
+			"friendlyname": "org_id"
+		},
+		{
+			"attcode": "ping_enabled",
+			"update": "0",
+			"reconcile": "0",
+			"update_policy": "master_locked",
+			"finalclass": "SynchroAttribute",
+			"friendlyname": "ping_enabled"
+		},
+		{
+			"attcode": "ping_timeout",
+			"update": "0",
+			"reconcile": "0",
+			"update_policy": "master_locked",
+			"finalclass": "SynchroAttribute",
+			"friendlyname": "ping_timeout"
+		},
+		{
+			"attcode": "port_number",
+			"update": "0",
+			"reconcile": "0",
+			"update_policy": "master_locked",
+			"finalclass": "SynchroAttribute",
+			"friendlyname": "port_number"
+		},
+		{
+			"attcode": "protocol",
+			"update": "0",
+			"reconcile": "0",
+			"update_policy": "master_locked",
+			"finalclass": "SynchroAttribute",
+			"friendlyname": "protocol"
+		},
+		{
+			"attcode": "scan_cnx_refused_enabled",
+			"update": "1",
+			"reconcile": "0",
+			"update_policy": "master_locked",
+			"finalclass": "SynchroAttribute",
+			"friendlyname": "scan_cnx_refused_enabled"
+		},
+		{
+			"attcode": "scan_enabled",
+			"update": "0",
+			"reconcile": "0",
+			"update_policy": "master_locked",
+			"finalclass": "SynchroAttribute",
+			"friendlyname": "scan_enabled"
+		},
+		{
+			"attcode": "scan_timeout",
+			"update": "0",
+			"reconcile": "0",
+			"update_policy": "master_locked",
+			"finalclass": "SynchroAttribute",
+			"friendlyname": "scan_timeout"
+		},
+		{
+			"attcode": "status",
+			"update": "0",
+			"reconcile": "0",
+			"update_policy": "master_locked",
+			"finalclass": "SynchroAttribute",
+			"friendlyname": "status"
+		},
+		{
+			"attcode": "tickets_list",
+			"update": "0",
+			"reconcile": "0",
+			"update_policy": "master_locked",
+			"row_separator": "|",
+			"attribute_separator": ";",
+			"value_separator": ":",
+			"attribute_qualifier": "'",
+			"finalclass": "SynchroAttLinkSet",
+			"friendlyname": "tickets_list"
+		},
+		{
+			"attcode": "uuid",
+			"update": "0",
+			"reconcile": "1",
+			"update_policy": "master_locked",
+			"finalclass": "SynchroAttribute",
+			"friendlyname": "uuid"
+		}
+	],
+	"user_delete_policy": "everybody",
+	"url_icon": "",
+	"url_application": "",
+	"notify_contact_id_obsolescence_flag": ""
+}
