@@ -27,9 +27,11 @@ class TeemIpDiscoveryIPv4Collector extends Collector
 	protected $iPortNumber;
 	protected $sProtocol;
 	protected $iScanTimeout;
+	protected $bScanConnectionRefusedEnabled;
 	protected $sIPDefaultStatus;
 	protected $bZoneMgmtIsInstalled;
 	protected $sIPDefaultView;
+	static protected $aIPApplication;
 	static protected $aIPv4SubnetsList;
 	protected $sPingPath;
 	protected $sDigPath;
@@ -82,7 +84,8 @@ class TeemIpDiscoveryIPv4Collector extends Collector
 		$this->sIPDefaultView = Utils::GetConfigurationValue('ip_default_view','');
 		$this->sPingPath = Utils::GetConfigurationValue('ping_absolute_path','');
 		$this->sDigPath = Utils::GetConfigurationValue('dig_absolute_path','');
-		self::$aIPv4SubnetsList   = array();
+		self::$aIPApplication = array();
+		self::$aIPv4SubnetsList = array();
 		
 		$this->aIPv4 = array();
 	}
@@ -140,16 +143,17 @@ class TeemIpDiscoveryIPv4Collector extends Collector
 						{
 							$aData = reset($aResult['objects']);
 							$aIPDiscoveryAttributes = $aData['fields'];
-							
-							$this->sPingEnabled 	= $aIPDiscoveryAttributes['ping_enabled'];
-							$this->iPingTimeout 	= $aIPDiscoveryAttributes['ping_timeout'];
-							$this->sIplookupEnabled	= $aIPDiscoveryAttributes['iplookup_enabled'];
-							$this->sDNS1 			= $aIPDiscoveryAttributes['dns1'];
-							$this->sDNS2 			= $aIPDiscoveryAttributes['dns2'];
-							$this->sScanEnabled 	= $aIPDiscoveryAttributes['scan_enabled'];
-							$this->iPortNumber 		= $aIPDiscoveryAttributes['port_number'];
-							$this->sProtocol		= $aIPDiscoveryAttributes['protocol'];
-							$this->iScanTimeout		= $aIPDiscoveryAttributes['scan_timeout'];
+
+							$this->sPingEnabled 	                = $aIPDiscoveryAttributes['ping_enabled'];
+							$this->iPingTimeout 	                = $aIPDiscoveryAttributes['ping_timeout'];
+							$this->sIplookupEnabled	                = $aIPDiscoveryAttributes['iplookup_enabled'];
+							$this->sDNS1 			                = $aIPDiscoveryAttributes['dns1'];
+							$this->sDNS2 			                = $aIPDiscoveryAttributes['dns2'];
+							$this->sScanEnabled 	                = $aIPDiscoveryAttributes['scan_enabled'];
+							$this->iPortNumber 		                = $aIPDiscoveryAttributes['port_number'];
+							$this->sProtocol		                = $aIPDiscoveryAttributes['protocol'];
+							$this->iScanTimeout		                = $aIPDiscoveryAttributes['scan_timeout'];
+							$this->bScanConnectionRefusedEnabled    = $aIPDiscoveryAttributes['scan_cnx_refused_enabled'];
 							foreach ($aIPDiscoveryAttributes['ipv4subnets_list'] as $sSubnetKey => $aIPv4Subnet)
 							{
 								$sIndex = $aIPv4Subnet['ip'];
@@ -165,12 +169,13 @@ class TeemIpDiscoveryIPv4Collector extends Collector
 								{
 									self::$aIPv4SubnetsList[$sIndex]['ipdiscovery_enabled'] = true;
 								}
-								self::$aIPv4SubnetsList[$sIndex]['ping_enabled'] 		= $aIPv4Subnet['ping_enabled'];
-								self::$aIPv4SubnetsList[$sIndex]['ping_duration'] 		= 0;
-								self::$aIPv4SubnetsList[$sIndex]['iplookup_enabled']	= $aIPv4Subnet['iplookup_enabled'];
-								self::$aIPv4SubnetsList[$sIndex]['iplookup_duration'] 	= 0;
-								self::$aIPv4SubnetsList[$sIndex]['scan_enabled'] 		= $aIPv4Subnet['scan_enabled'];
-								self::$aIPv4SubnetsList[$sIndex]['scan_duration'] 		= 0;
+								self::$aIPv4SubnetsList[$sIndex]['ping_enabled'] 		        = $aIPv4Subnet['ping_enabled'];
+								self::$aIPv4SubnetsList[$sIndex]['ping_duration'] 		        = 0;
+								self::$aIPv4SubnetsList[$sIndex]['iplookup_enabled']	        = $aIPv4Subnet['iplookup_enabled'];
+								self::$aIPv4SubnetsList[$sIndex]['iplookup_duration'] 	        = 0;
+								self::$aIPv4SubnetsList[$sIndex]['scan_enabled'] 		        = $aIPv4Subnet['scan_enabled'];
+								self::$aIPv4SubnetsList[$sIndex]['scan_duration'] 		        = 0;
+								self::$aIPv4SubnetsList[$sIndex]['scan_cnx_refused_enabled']    = $aIPv4Subnet['scan_cnx_refused_enabled'];
 							}
 								
 							Utils::Log(LOG_INFO, "---------- IP Discovery Parameters ----------");
@@ -183,6 +188,7 @@ class TeemIpDiscoveryIPv4Collector extends Collector
 							Utils::Log(LOG_INFO, "Port number: ".$this->iPortNumber);
 							Utils::Log(LOG_INFO, "Protocol: ".$this->sProtocol);
 							Utils::Log(LOG_INFO, "Scan timeout: ".$this->iScanTimeout);
+							Utils::Log(LOG_INFO, "Scan \"connection refused\" enabled: ".$this->bScanConnectionRefusedEnabled);
 							Utils::Log(LOG_INFO, "---------- List of subnets to discover ----------");
 							foreach (self::$aIPv4SubnetsList as $sIp => $aIPv4Subnet)
 							{
@@ -193,6 +199,7 @@ class TeemIpDiscoveryIPv4Collector extends Collector
 									Utils::Log(LOG_DEBUG, "     Ping enabled: ".$aIPv4Subnet['ping_enabled']);
 									Utils::Log(LOG_DEBUG, "     Iplookup enabled: ".$aIPv4Subnet['iplookup_enabled']);
 									Utils::Log(LOG_DEBUG, "     Scan enabled: ".$aIPv4Subnet['scan_enabled']);
+									Utils::Log(LOG_DEBUG, "     Scan \"connection refused\" enabled: ".$aIPv4Subnet['scan_cnx_refused_enabled']);
 								}
 								else
 								{
@@ -272,15 +279,15 @@ class TeemIpDiscoveryIPv4Collector extends Collector
 					{
 						$aIPAttributes = $aData['fields'];
 						$sIp = $aIPAttributes['ip'];
-						$this->aIPv4[$sIp]['synchro_data']['primary_key']           = $sIp;
-						$this->aIPv4[$sIp]['synchro_data']['ip']                    = $sIp;
-						$this->aIPv4[$sIp]['synchro_data']['org_id']                = $aIPAttributes['org_id'];
-						$this->aIPv4[$sIp]['synchro_data']['status']                = $aIPAttributes['status'];
-						$this->aIPv4[$sIp]['synchro_data']['view_id']               = ($this->bZoneMgmtIsInstalled) ? $aIPAttributes['view_name'] : '';
-						$this->aIPv4[$sIp]['synchro_data']['responds_to_ping']      = $aIPAttributes['responds_to_ping'];
-						$this->aIPv4[$sIp]['synchro_data']['responds_to_iplookup']  = $aIPAttributes['responds_to_iplookup'];
-						$this->aIPv4[$sIp]['synchro_data']['fqdn_from_iplookup']    = $aIPAttributes['fqdn_from_iplookup'];
-						$this->aIPv4[$sIp]['synchro_data']['responds_to_scan']      = $aIPAttributes['responds_to_scan'];
+						$this->aIPv4[$sIp]['synchro_data']['primary_key'] 			= $sIp;
+						$this->aIPv4[$sIp]['synchro_data']['ip']           			= $sIp;
+						$this->aIPv4[$sIp]['synchro_data']['org_id']				= $aIPAttributes['org_id'];
+						$this->aIPv4[$sIp]['synchro_data']['status']				= $aIPAttributes['status'];
+						$this->aIPv4[$sIp]['synchro_data']['view_id']             = ($this->bZoneMgmtIsInstalled) ? $aIPAttributes['view_name'] : '';
+						$this->aIPv4[$sIp]['synchro_data']['responds_to_ping']		= $aIPAttributes['responds_to_ping'];
+						$this->aIPv4[$sIp]['synchro_data']['responds_to_iplookup']	= $aIPAttributes['responds_to_iplookup'];
+						$this->aIPv4[$sIp]['synchro_data']['fqdn_from_iplookup']	= $aIPAttributes['fqdn_from_iplookup'];
+						$this->aIPv4[$sIp]['synchro_data']['responds_to_scan']		= $aIPAttributes['responds_to_scan'];
 						$this->aIPv4[$sIp]['has_changed'] = false;
 									
 						Utils::Log(LOG_DEBUG, "IP: ".$sIp);
@@ -541,6 +548,14 @@ class TeemIpDiscoveryIPv4Collector extends Collector
 			{
 				$iSubnetIp = ip2long($sSubnetIp);
 				$iBroadcastIp = ip2long($aIPv4Subnet['broadcastip']);
+				if (($this->bScanConnectionRefusedEnabled == 'yes') && ($aIPv4Subnet['scan_cnx_refused_enabled'] == 'yes'))
+				{
+					$bScanCnxRefusedEnabled = true;
+				}
+				else
+				{
+					$bScanCnxRefusedEnabled = false;
+				}
 				
 				$iIp = $iSubnetIp + 1;
 				$iScanTimeout = ($this->iScanTimeout == 0) ? 1 : $this->iScanTimeout;
@@ -607,13 +622,47 @@ class TeemIpDiscoveryIPv4Collector extends Collector
 					if (!$ScanResult)
 					{
 						// IP doesn't answer to scan.
+						// Check errno:
+						//  111 -> connection is refused: the CI may be alive but not able or willing to answer on that port. A firewall may be blocking the traffic too...
+						//  110 -> connection time out: we can assume that no CI sits behind the IP
 						// Reset scan attribute if IP is already registered
 						if (array_key_exists($sIp, $this->aIPv4))
 						{
 							// Change data anyway as time stamp changes
-							$this->aIPv4[$sIp]['synchro_data']['responds_to_scan'] = 'no';
+							if (($errno == 111) && ($bScanCnxRefusedEnabled))
+							{
+								$this->aIPv4[$sIp]['synchro_data']['responds_to_scan'] = 'cnx_refused';
+							}
+							else
+							{
+								$this->aIPv4[$sIp]['synchro_data']['responds_to_scan'] = 'no';
+							}
 							$this->aIPv4[$sIp]['synchro_data']['last_discovery_date'] = $sTimeStamp;
 							$this->aIPv4[$sIp]['has_changed'] = 'yes';
+						}
+						else
+						{
+							// Create IP if cnx_refused
+							if (($errno == 111) && ($bScanCnxRefusedEnabled))
+							{
+								$aValues = array(
+									'primary_key' => $sIp,
+									'ip' => $sIp,
+									'org_id' => $aIPv4Subnet['org_id'],
+									'status' => $this->sIPDefaultStatus,
+									'last_discovery_date' => $sTimeStamp,
+									'responds_to_ping' => 'na',
+									'responds_to_iplookup' => 'na',
+									'fqdn_from_iplookup' => '',
+									'responds_to_scan' => 'cnx_refused',
+								);
+								if ($this->bZoneMgmtIsInstalled)
+								{
+									$aValues['view_id'] = $this->sIPDefaultView;
+								}
+								$this->aIPv4[$sIp]['synchro_data'] = $aValues;
+								$this->aIPv4[$sIp]['has_changed'] = 'yes';
+							}
 						}
 						Utils::Log(LOG_DEBUG, "Scan ".$sIp." -> Not OK: ".$errstr ."(".$errno.")");
 					}
@@ -622,8 +671,7 @@ class TeemIpDiscoveryIPv4Collector extends Collector
 						// IP answers to scan
 				    	if (array_key_exists($sIp, $this->aIPv4))
 						{
-							if (($this->aIPv4[$sIp]['synchro_data']['responds_to_scan'] == 'no') ||
-								($this->aIPv4[$sIp]['synchro_data']['responds_to_scan'] == 'na'))
+							if ($this->aIPv4[$sIp]['synchro_data']['responds_to_scan'] != 'yes')
 							{
 								$this->aIPv4[$sIp]['synchro_data']['responds_to_scan'] ='yes';
 								$this->aIPv4[$sIp]['has_changed'] = 'yes';
@@ -668,6 +716,11 @@ class TeemIpDiscoveryIPv4Collector extends Collector
 		}
 	}
 
+	public static function GetApplication()
+	{
+		return self::$aIPApplication;
+	}
+
 	public static function GetUpdatedSubnetList()
 	{
 		return self::$aIPv4SubnetsList;
@@ -708,7 +761,8 @@ class TeemIpDiscoveryIPv4Collector extends Collector
 		$this->GetRegisteredIps();
 
 		// Time stamp discovery
-		$sTimeStamp = date('Y-m-d H:i:s', time());
+		$iStartTime = time();
+		$sTimeStamp = date('Y-m-d H:i:s', $iStartTime);
 		foreach (self::$aIPv4SubnetsList as $sSubnetIp => $aIPv4Subnet)
 		{
 			self::$aIPv4SubnetsList[$sSubnetIp]['last_discovery_date'] = $sTimeStamp;
@@ -745,6 +799,13 @@ class TeemIpDiscoveryIPv4Collector extends Collector
 			}
 		}
 		$this->aIPv4 = $aFinalIPv4;
+
+		// Time stamp IP Discovery application
+		$iFinishTime = time();
+		self::$aIPApplication['uuid'] = $this->sDiscoveryApplicationUUID;
+		self::$aIPApplication['last_discovery_date'] = $sTimeStamp;
+		self::$aIPApplication['duration'] = $iFinishTime - $iStartTime;
+
 		return true;
 	}
 
