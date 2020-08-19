@@ -32,7 +32,7 @@ class TeemIpDiscoveryIPv4SubnetCollector extends Collector
 		// Read updated subnet list from discovery activity that just took place
 		$aIPv4SubnetsList = TeemIpDiscoveryIPv4Collector::GetUpdatedSubnetList();
 
-		self::$aIPv4Subnet = array();
+//		self::$aIPv4Subnet = array();
 		$index = 0;
 		foreach ($aIPv4SubnetsList as $sSubnetIp => $aIPv4Subnet)
 		{

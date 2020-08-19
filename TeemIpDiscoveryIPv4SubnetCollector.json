@@ -106,6 +106,14 @@
 			"friendlyname": "ip_occupancy"
 		},
 		{
+			"attcode": "ipdiscovery_enabled",
+			"update": "0",
+			"reconcile": "0",
+			"update_policy": "master_locked",
+			"finalclass": "SynchroAttribute",
+			"friendlyname": "ipdiscovery_enabled"
+		},
+		{
 			"attcode": "ipdiscovery_id",
 			"update": "0",
 			"reconcile": "0",
@@ -239,6 +247,18 @@
 			"update_policy": "master_locked",
 			"finalclass": "SynchroAttribute",
 			"friendlyname": "status"
+		},
+		{
+			"attcode": "subnets_list",
+			"update": "0",
+			"reconcile": "0",
+			"update_policy": "master_locked",
+			"row_separator": "|",
+			"attribute_separator": ";",
+			"value_separator": ":",
+			"attribute_qualifier": "'",
+			"finalclass": "SynchroAttLinkSet",
+			"friendlyname": "subnets_list"
 		},
 		{
 			"attcode": "type",
