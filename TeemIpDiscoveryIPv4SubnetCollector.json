@@ -241,6 +241,14 @@
 			"friendlyname": "requestor_id"
 		},
 		{
+			"attcode": "scan_cnx_refused_enabled",
+			"update": "0",
+			"reconcile": "0",
+			"update_policy": "master_locked",
+			"finalclass": "SynchroAttribute",
+			"friendlyname": "scan_cnx_refused_enabled"
+		},
+		{
 			"attcode": "scan_discovered",
 			"update": "1",
 			"reconcile": "0",
