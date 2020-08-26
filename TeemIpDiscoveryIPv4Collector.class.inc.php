@@ -60,12 +60,12 @@ class TeemIpDiscoveryIPv4Collector extends Collector
 		}
 		catch(Exception $e)
 		{
-            $sMessage = 'TeemIp is considered as NOT installed due to: ' . $e->getMessage();
-            if(is_a($e, "IOException"))
-            {
-                Utils::Log(LOG_ERR, $sMessage);
-                throw $e;
-            }
+			$sMessage = 'TeemIp is considered as NOT installed due to: ' . $e->getMessage();
+			if(is_a($e, "IOException"))
+			{
+				Utils::Log(LOG_ERR, $sMessage);
+				throw $e;
+			}
 		}
 
 		Utils::Log(LOG_INFO, $sMessage);
@@ -92,10 +92,14 @@ class TeemIpDiscoveryIPv4Collector extends Collector
 
 	protected function GetDelayAsString($iStart, $iStop)
 	{
-		$iDelay = $iStop -$iStart;
+		$iDelay = $iStop - $iStart;
 		$iHours = intval($iDelay / 3600);
 		$iMinutes = intval(($iDelay - ($iHours * 3600)) / 60);
 		$iSeconds = $iDelay - ($iHours * 3600) - ($iMinutes * 60);
+		if ($iSeconds < 1)
+		{
+			$iSeconds = 1;
+		}
 		
 		$sDelay = $iHours." hours, ".$iMinutes." minutes, ".$iSeconds." seconds";
 		return $sDelay;
@@ -171,10 +175,13 @@ class TeemIpDiscoveryIPv4Collector extends Collector
 								}
 								self::$aIPv4SubnetsList[$sIndex]['ping_enabled'] 		        = $aIPv4Subnet['ping_enabled'];
 								self::$aIPv4SubnetsList[$sIndex]['ping_duration'] 		        = 0;
+								self::$aIPv4SubnetsList[$sIndex]['ping_discovered']		        = 0;
 								self::$aIPv4SubnetsList[$sIndex]['iplookup_enabled']	        = $aIPv4Subnet['iplookup_enabled'];
 								self::$aIPv4SubnetsList[$sIndex]['iplookup_duration'] 	        = 0;
+								self::$aIPv4SubnetsList[$sIndex]['iplookup_discovered'] 	    = 0;
 								self::$aIPv4SubnetsList[$sIndex]['scan_enabled'] 		        = $aIPv4Subnet['scan_enabled'];
 								self::$aIPv4SubnetsList[$sIndex]['scan_duration'] 		        = 0;
+								self::$aIPv4SubnetsList[$sIndex]['scan_discovered'] 		    = 0;
 								self::$aIPv4SubnetsList[$sIndex]['scan_cnx_refused_enabled']    = $aIPv4Subnet['scan_cnx_refused_enabled'];
 							}
 								
@@ -383,7 +390,8 @@ class TeemIpDiscoveryIPv4Collector extends Collector
 				    $iIp += 1;
 				}
 				$iFinishTime = time();
-				self::$aIPv4SubnetsList[$sSubnetIp]['ping_duration'] = $iFinishTime - $iStartTime;
+				self::$aIPv4SubnetsList[$sSubnetIp]['ping_duration'] = (($iFinishTime - $iStartTime) == 0) ? 1 : ($iFinishTime - $iStartTime);
+				self::$aIPv4SubnetsList[$sSubnetIp]['ping_discovered'] = $iNbIPsThatPing;
 				Utils::Log(LOG_INFO, "Subnet: ".$sSubnetIp." has been pinged:");
 				Utils::Log(LOG_DEBUG, "      - Duration: ".$this->GetDelayAsString($iStartTime, $iFinishTime));
 				Utils::Log(LOG_DEBUG, "      - Number of IPs that ping: ".$iNbIPsThatPing);
@@ -520,7 +528,8 @@ class TeemIpDiscoveryIPv4Collector extends Collector
 					$iIp += 1;
 				}
 				$iFinishTime = time();
-				self::$aIPv4SubnetsList[$sSubnetIp]['iplookup_duration'] = $iFinishTime - $iStartTime;
+				self::$aIPv4SubnetsList[$sSubnetIp]['iplookup_duration'] = (($iFinishTime - $iStartTime) == 0) ? 1 : ($iFinishTime - $iStartTime);
+				self::$aIPv4SubnetsList[$sSubnetIp]['iplookup_discovered'] = $iNbIPsInDNS;
 				Utils::Log(LOG_INFO, "Subnet: ".$sSubnetIp." has been looked up:");
 				Utils::Log(LOG_DEBUG, "      - Duration: ".$this->GetDelayAsString($iStartTime, $iFinishTime));
 				Utils::Log(LOG_DEBUG, "      - Number of IPs in DNS: ".$iNbIPsInDNS);
@@ -704,7 +713,8 @@ class TeemIpDiscoveryIPv4Collector extends Collector
 				    $iIp += 1;
 				}
 				$iFinishTime = time();
-				self::$aIPv4SubnetsList[$sSubnetIp]['scan_duration'] = $iFinishTime - $iStartTime;
+				self::$aIPv4SubnetsList[$sSubnetIp]['scan_duration'] = (($iFinishTime - $iStartTime) == 0) ? 1 : ($iFinishTime - $iStartTime);
+				self::$aIPv4SubnetsList[$sSubnetIp]['scan_discovered'] = $iNbIPsThatAnswerToScan;
 				Utils::Log(LOG_INFO, "Subnet: ".$sSubnetIp." has been scanned:");
 				Utils::Log(LOG_DEBUG, "      - Duration: ".$this->GetDelayAsString($iStartTime, $iFinishTime));
 				Utils::Log(LOG_DEBUG, "      - Number of IPs that have been scanned: ".$iNbIPsThatAnswerToScan);

@@ -123,6 +123,14 @@
 			"friendlyname": "ipdiscovery_id"
 		},
 		{
+			"attcode": "iplookup_discovered",
+			"update": "1",
+			"reconcile": "0",
+			"update_policy": "master_locked",
+			"finalclass": "SynchroAttribute",
+			"friendlyname": "iplookup_discovered"
+		},
+		{
 			"attcode": "iplookup_duration",
 			"update": "1",
 			"reconcile": "0",
@@ -184,6 +192,14 @@
 			"friendlyname": "org_id"
 		},
 		{
+			"attcode": "ping_discovered",
+			"update": "1",
+			"reconcile": "0",
+			"update_policy": "master_locked",
+			"finalclass": "SynchroAttribute",
+			"friendlyname": "ping_discovered"
+		},
+		{
 			"attcode": "ping_duration",
 			"update": "1",
 			"reconcile": "0",
@@ -223,6 +239,14 @@
 			"reconciliation_attcode": "",
 			"finalclass": "SynchroAttExtKey",
 			"friendlyname": "requestor_id"
+		},
+		{
+			"attcode": "scan_discovered",
+			"update": "1",
+			"reconcile": "0",
+			"update_policy": "master_locked",
+			"finalclass": "SynchroAttribute",
+			"friendlyname": "scan_discovered"
 		},
 		{
 			"attcode": "scan_duration",
