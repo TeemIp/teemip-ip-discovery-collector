@@ -1,17 +1,17 @@
-# <img src="https://wiki.teemip.net/lib/exe/fetch.php?media=extensions:classicon_ipdiscovery.png"> TeemIp IP Discovery
-TeemIp extension that enables IP discovery management
+# <img src="https://wiki.teemip.net/lib/exe/fetch.php?media=extensions:classicon_ipdiscovery.png"> TeemIp IP Discovery - Collector
+TeemIp solution to discover IP addresses
 
 
 ## Description
 
-This extension adapts TeemIp's standard data model to manage remote IP Discovery Applications. It enables communication with the different discovery engines and store their outputs in TeemIp database.
+TeemIp IP Discovery Collector is the standalone application that discovers active IPs on networks based on directives provided by the the TeemIp IP Discovery Extension installed on TeemIp. 
 
 
 ## Documentation
 
 Comprehensive documentation can be found on TeemIp’s [wiki][1], namely in the chapter dedicated to the extension:
 
-[IP Discovery - Extension][2]
+[IP Discovery - Collector][2]
 
 [1]: https://wiki.teemip.net
-[2]: https://wiki.teemip.net/doku.php?id=extensions:teemip-ip-discovery-extension
+[2]: https://wiki.teemip.net/doku.php?id=extensions:teemip-ip-discovery-collector
