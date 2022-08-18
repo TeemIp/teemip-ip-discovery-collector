@@ -1,339 +1,348 @@
 {
-	"name": "$subnetv4_synchro_name$ - $discovery_application_uuid$",
-	"description": "Update of IPv4 subnets by TeemIp Discovery Application",
-	"status": "production",
-	"user_id": "$synchro_user$",
-	"notify_contact_id": "$contact_to_notify$",
-	"scope_class": "IPv4Subnet",
-	"database_table_name": "synchro_data_ipv4subnet_$discovery_application_uuid$",
-	"scope_restriction": "",
-	"full_load_periodicity": "0",
-	"reconciliation_policy": "use_attributes",
-	"action_on_zero": "error",
-	"action_on_one": "update",
-	"action_on_multiple": "error",
-	"delete_policy": "ignore",
-	"delete_policy_update": "",
-	"delete_policy_retention": "0",
-	"attribute_list": [
-		{
-			"attcode": "alarm_water_mark",
-			"update": "0",
-			"reconcile": "0",
-			"update_policy": "master_locked",
-			"finalclass": "SynchroAttribute",
-			"friendlyname": "alarm_water_mark"
-		},
-		{
-			"attcode": "allocation_date",
-			"update": "0",
-			"reconcile": "0",
-			"update_policy": "master_locked",
-			"finalclass": "SynchroAttribute",
-			"friendlyname": "allocation_date"
-		},
-		{
-			"attcode": "block_id",
-			"update": "0",
-			"reconcile": "0",
-			"update_policy": "master_locked",
-			"reconciliation_attcode": "",
-			"finalclass": "SynchroAttExtKey",
-			"friendlyname": "block_id"
-		},
-		{
-			"attcode": "broadcastip",
-			"update": "0",
-			"reconcile": "0",
-			"update_policy": "master_locked",
-			"finalclass": "SynchroAttribute",
-			"friendlyname": "broadcastip"
-		},
-		{
-			"attcode": "comment",
-			"update": "0",
-			"reconcile": "0",
-			"update_policy": "master_locked",
-			"finalclass": "SynchroAttribute",
-			"friendlyname": "comment"
-		},
-		{
-			"attcode": "contact_list",
-			"update": "0",
-			"reconcile": "0",
-			"update_policy": "master_locked",
-			"row_separator": "|",
-			"attribute_separator": ";",
-			"value_separator": ":",
-			"attribute_qualifier": "'",
-			"finalclass": "SynchroAttLinkSet",
-			"friendlyname": "contact_list"
-		},
-		{
-			"attcode": "document_list",
-			"update": "0",
-			"reconcile": "0",
-			"update_policy": "master_locked",
-			"row_separator": "|",
-			"attribute_separator": ";",
-			"value_separator": ":",
-			"attribute_qualifier": "'",
-			"finalclass": "SynchroAttLinkSet",
-			"friendlyname": "document_list"
-		},
-		{
-			"attcode": "gatewayip",
-			"update": "0",
-			"reconcile": "0",
-			"update_policy": "master_locked",
-			"finalclass": "SynchroAttribute",
-			"friendlyname": "gatewayip"
-		},
-		{
-			"attcode": "ip",
-			"update": "0",
-			"reconcile": "1",
-			"update_policy": "master_locked",
-			"finalclass": "SynchroAttribute",
-			"friendlyname": "ip"
-		},
-		{
-			"attcode": "ip_occupancy",
-			"update": "0",
-			"reconcile": "0",
-			"update_policy": "master_locked",
-			"finalclass": "SynchroAttribute",
-			"friendlyname": "ip_occupancy"
-		},
-		{
-			"attcode": "ipdiscovery_enabled",
-			"update": "0",
-			"reconcile": "0",
-			"update_policy": "master_locked",
-			"finalclass": "SynchroAttribute",
-			"friendlyname": "ipdiscovery_enabled"
-		},
-		{
-			"attcode": "ipdiscovery_id",
-			"update": "0",
-			"reconcile": "0",
-			"update_policy": "master_locked",
-			"reconciliation_attcode": "",
-			"finalclass": "SynchroAttExtKey",
-			"friendlyname": "ipdiscovery_id"
-		},
-		{
-			"attcode": "iplookup_discovered",
-			"update": "1",
-			"reconcile": "0",
-			"update_policy": "master_locked",
-			"finalclass": "SynchroAttribute",
-			"friendlyname": "iplookup_discovered"
-		},
-		{
-			"attcode": "iplookup_duration",
-			"update": "1",
-			"reconcile": "0",
-			"update_policy": "master_locked",
-			"finalclass": "SynchroAttribute",
-			"friendlyname": "iplookup_duration"
-		},
-		{
-			"attcode": "iplookup_enabled",
-			"update": "0",
-			"reconcile": "0",
-			"update_policy": "master_locked",
-			"finalclass": "SynchroAttribute",
-			"friendlyname": "iplookup_enabled"
-		},
-		{
-			"attcode": "last_discovery_date",
-			"update": "1",
-			"reconcile": "0",
-			"update_policy": "master_locked",
-			"finalclass": "SynchroAttribute",
-			"friendlyname": "last_discovery_date"
-		},
-		{
-			"attcode": "location_list",
-			"update": "0",
-			"reconcile": "0",
-			"update_policy": "master_locked",
-			"row_separator": "|",
-			"attribute_separator": ";",
-			"value_separator": ":",
-			"attribute_qualifier": "'",
-			"finalclass": "SynchroAttLinkSet",
-			"friendlyname": "location_list"
-		},
-		{
-			"attcode": "mask",
-			"update": "0",
-			"reconcile": "0",
-			"update_policy": "master_locked",
-			"finalclass": "SynchroAttribute",
-			"friendlyname": "mask"
-		},
-		{
-			"attcode": "name",
-			"update": "0",
-			"reconcile": "0",
-			"update_policy": "master_locked",
-			"finalclass": "SynchroAttribute",
-			"friendlyname": "name"
-		},
-		{
-			"attcode": "org_id",
-			"update": "0",
-			"reconcile": "1",
-			"update_policy": "master_locked",
-			"reconciliation_attcode": "",
-			"finalclass": "SynchroAttExtKey",
-			"friendlyname": "org_id"
-		},
-		{
-			"attcode": "ping_discovered",
-			"update": "1",
-			"reconcile": "0",
-			"update_policy": "master_locked",
-			"finalclass": "SynchroAttribute",
-			"friendlyname": "ping_discovered"
-		},
-		{
-			"attcode": "ping_duration",
-			"update": "1",
-			"reconcile": "0",
-			"update_policy": "master_locked",
-			"finalclass": "SynchroAttribute",
-			"friendlyname": "ping_duration"
-		},
-		{
-			"attcode": "ping_enabled",
-			"update": "0",
-			"reconcile": "0",
-			"update_policy": "master_locked",
-			"finalclass": "SynchroAttribute",
-			"friendlyname": "ping_enabled"
-		},
-		{
-			"attcode": "range_occupancy",
-			"update": "0",
-			"reconcile": "0",
-			"update_policy": "master_locked",
-			"finalclass": "SynchroAttribute",
-			"friendlyname": "range_occupancy"
-		},
-		{
-			"attcode": "release_date",
-			"update": "0",
-			"reconcile": "0",
-			"update_policy": "master_locked",
-			"finalclass": "SynchroAttribute",
-			"friendlyname": "release_date"
-		},
-		{
-			"attcode": "requestor_id",
-			"update": "0",
-			"reconcile": "0",
-			"update_policy": "master_locked",
-			"reconciliation_attcode": "",
-			"finalclass": "SynchroAttExtKey",
-			"friendlyname": "requestor_id"
-		},
-		{
-			"attcode": "scan_cnx_refused_enabled",
-			"update": "0",
-			"reconcile": "0",
-			"update_policy": "master_locked",
-			"finalclass": "SynchroAttribute",
-			"friendlyname": "scan_cnx_refused_enabled"
-		},
-		{
-			"attcode": "scan_discovered",
-			"update": "1",
-			"reconcile": "0",
-			"update_policy": "master_locked",
-			"finalclass": "SynchroAttribute",
-			"friendlyname": "scan_discovered"
-		},
-		{
-			"attcode": "scan_duration",
-			"update": "1",
-			"reconcile": "0",
-			"update_policy": "master_locked",
-			"finalclass": "SynchroAttribute",
-			"friendlyname": "scan_duration"
-		},
-		{
-			"attcode": "scan_enabled",
-			"update": "0",
-			"reconcile": "0",
-			"update_policy": "master_locked",
-			"finalclass": "SynchroAttribute",
-			"friendlyname": "scan_enabled"
-		},
-		{
-			"attcode": "status",
-			"update": "0",
-			"reconcile": "0",
-			"update_policy": "master_locked",
-			"finalclass": "SynchroAttribute",
-			"friendlyname": "status"
-		},
-		{
-			"attcode": "subnets_list",
-			"update": "0",
-			"reconcile": "0",
-			"update_policy": "master_locked",
-			"row_separator": "|",
-			"attribute_separator": ";",
-			"value_separator": ":",
-			"attribute_qualifier": "'",
-			"finalclass": "SynchroAttLinkSet",
-			"friendlyname": "subnets_list"
-		},
-		{
-			"attcode": "type",
-			"update": "0",
-			"reconcile": "0",
-			"update_policy": "master_locked",
-			"finalclass": "SynchroAttribute",
-			"friendlyname": "type"
-		},
-		{
-			"attcode": "vlans_list",
-			"update": "0",
-			"reconcile": "0",
-			"update_policy": "master_locked",
-			"row_separator": "|",
-			"attribute_separator": ";",
-			"value_separator": ":",
-			"attribute_qualifier": "'",
-			"finalclass": "SynchroAttLinkSet",
-			"friendlyname": "vlans_list"
-		},
-		{
-			"attcode": "vrfs_list",
-			"update": "0",
-			"reconcile": "0",
-			"update_policy": "master_locked",
-			"row_separator": "|",
-			"attribute_separator": ";",
-			"value_separator": ":",
-			"attribute_qualifier": "'",
-			"finalclass": "SynchroAttLinkSet",
-			"friendlyname": "vrfs_list"
-		},
-		{
-			"attcode": "write_reason",
-			"update": "0",
-			"reconcile": "0",
-			"update_policy": "master_locked",
-			"finalclass": "SynchroAttribute",
-			"friendlyname": "write_reason"
-		}
-	],
-	"user_delete_policy": "everybody",
-	"url_icon": "",
-	"url_application": ""
+  "name": "$subnetv4_synchro_name$ - $discovery_application_uuid$",
+  "description": "Update of IPv4 subnets by TeemIp Discovery Application",
+  "status": "production",
+  "user_id": "$synchro_user$",
+  "notify_contact_id": "$contact_to_notify$",
+  "scope_class": "IPv4Subnet",
+  "database_table_name": "synchro_data_ipv4subnet_$discovery_application_uuid$",
+  "scope_restriction": "",
+  "full_load_periodicity": "0",
+  "reconciliation_policy": "use_attributes",
+  "action_on_zero": "error",
+  "action_on_one": "update",
+  "action_on_multiple": "error",
+  "delete_policy": "ignore",
+  "delete_policy_update": "",
+  "delete_policy_retention": "0",
+  "attribute_list": [
+    {
+      "attcode": "alarm_water_mark",
+      "update": "0",
+      "reconcile": "0",
+      "update_policy": "master_locked",
+      "finalclass": "SynchroAttribute",
+      "friendlyname": "alarm_water_mark"
+    },
+    {
+      "attcode": "allocation_date",
+      "update": "0",
+      "reconcile": "0",
+      "update_policy": "master_locked",
+      "finalclass": "SynchroAttribute",
+      "friendlyname": "allocation_date"
+    },
+    {
+      "attcode": "block_id",
+      "update": "0",
+      "reconcile": "0",
+      "update_policy": "master_locked",
+      "reconciliation_attcode": "",
+      "finalclass": "SynchroAttExtKey",
+      "friendlyname": "block_id"
+    },
+    {
+      "attcode": "broadcastip",
+      "update": "0",
+      "reconcile": "0",
+      "update_policy": "master_locked",
+      "finalclass": "SynchroAttribute",
+      "friendlyname": "broadcastip"
+    },
+    {
+      "attcode": "comment",
+      "update": "0",
+      "reconcile": "0",
+      "update_policy": "master_locked",
+      "finalclass": "SynchroAttribute",
+      "friendlyname": "comment"
+    },
+    {
+      "attcode": "contact_list",
+      "update": "0",
+      "reconcile": "0",
+      "update_policy": "master_locked",
+      "row_separator": "|",
+      "attribute_separator": ";",
+      "value_separator": ":",
+      "attribute_qualifier": "'",
+      "finalclass": "SynchroAttLinkSet",
+      "friendlyname": "contact_list"
+    },
+    {
+      "attcode": "document_list",
+      "update": "0",
+      "reconcile": "0",
+      "update_policy": "master_locked",
+      "row_separator": "|",
+      "attribute_separator": ";",
+      "value_separator": ":",
+      "attribute_qualifier": "'",
+      "finalclass": "SynchroAttLinkSet",
+      "friendlyname": "document_list"
+    },
+    {
+      "attcode": "gatewayip",
+      "update": "0",
+      "reconcile": "0",
+      "update_policy": "master_locked",
+      "finalclass": "SynchroAttribute",
+      "friendlyname": "gatewayip"
+    },
+    {
+      "attcode": "ip",
+      "update": "0",
+      "reconcile": "1",
+      "update_policy": "master_locked",
+      "finalclass": "SynchroAttribute",
+      "friendlyname": "ip"
+    },
+    {
+      "attcode": "ipconfig_id",
+      "update": "0",
+      "reconcile": "0",
+      "update_policy": "master_unlocked",
+      "reconciliation_attcode": "",
+      "finalclass": "SynchroAttExtKey",
+      "friendlyname": "ipconfig_id"
+    },
+    {
+      "attcode": "ip_occupancy",
+      "update": "0",
+      "reconcile": "0",
+      "update_policy": "master_locked",
+      "finalclass": "SynchroAttribute",
+      "friendlyname": "ip_occupancy"
+    },
+    {
+      "attcode": "ipdiscovery_enabled",
+      "update": "0",
+      "reconcile": "0",
+      "update_policy": "master_locked",
+      "finalclass": "SynchroAttribute",
+      "friendlyname": "ipdiscovery_enabled"
+    },
+    {
+      "attcode": "ipdiscovery_id",
+      "update": "0",
+      "reconcile": "0",
+      "update_policy": "master_locked",
+      "reconciliation_attcode": "",
+      "finalclass": "SynchroAttExtKey",
+      "friendlyname": "ipdiscovery_id"
+    },
+    {
+      "attcode": "iplookup_discovered",
+      "update": "1",
+      "reconcile": "0",
+      "update_policy": "master_locked",
+      "finalclass": "SynchroAttribute",
+      "friendlyname": "iplookup_discovered"
+    },
+    {
+      "attcode": "iplookup_duration",
+      "update": "1",
+      "reconcile": "0",
+      "update_policy": "master_locked",
+      "finalclass": "SynchroAttribute",
+      "friendlyname": "iplookup_duration"
+    },
+    {
+      "attcode": "iplookup_enabled",
+      "update": "0",
+      "reconcile": "0",
+      "update_policy": "master_locked",
+      "finalclass": "SynchroAttribute",
+      "friendlyname": "iplookup_enabled"
+    },
+    {
+      "attcode": "last_discovery_date",
+      "update": "1",
+      "reconcile": "0",
+      "update_policy": "master_locked",
+      "finalclass": "SynchroAttribute",
+      "friendlyname": "last_discovery_date"
+    },
+    {
+      "attcode": "location_list",
+      "update": "0",
+      "reconcile": "0",
+      "update_policy": "master_locked",
+      "row_separator": "|",
+      "attribute_separator": ";",
+      "value_separator": ":",
+      "attribute_qualifier": "'",
+      "finalclass": "SynchroAttLinkSet",
+      "friendlyname": "location_list"
+    },
+    {
+      "attcode": "mask",
+      "update": "0",
+      "reconcile": "0",
+      "update_policy": "master_locked",
+      "finalclass": "SynchroAttribute",
+      "friendlyname": "mask"
+    },
+    {
+      "attcode": "name",
+      "update": "0",
+      "reconcile": "0",
+      "update_policy": "master_locked",
+      "finalclass": "SynchroAttribute",
+      "friendlyname": "name"
+    },
+    {
+      "attcode": "org_id",
+      "update": "0",
+      "reconcile": "1",
+      "update_policy": "master_locked",
+      "reconciliation_attcode": "",
+      "finalclass": "SynchroAttExtKey",
+      "friendlyname": "org_id"
+    },
+    {
+      "attcode": "ping_discovered",
+      "update": "1",
+      "reconcile": "0",
+      "update_policy": "master_locked",
+      "finalclass": "SynchroAttribute",
+      "friendlyname": "ping_discovered"
+    },
+    {
+      "attcode": "ping_duration",
+      "update": "1",
+      "reconcile": "0",
+      "update_policy": "master_locked",
+      "finalclass": "SynchroAttribute",
+      "friendlyname": "ping_duration"
+    },
+    {
+      "attcode": "ping_enabled",
+      "update": "0",
+      "reconcile": "0",
+      "update_policy": "master_locked",
+      "finalclass": "SynchroAttribute",
+      "friendlyname": "ping_enabled"
+    },
+    {
+      "attcode": "range_occupancy",
+      "update": "0",
+      "reconcile": "0",
+      "update_policy": "master_locked",
+      "finalclass": "SynchroAttribute",
+      "friendlyname": "range_occupancy"
+    },
+    {
+      "attcode": "release_date",
+      "update": "0",
+      "reconcile": "0",
+      "update_policy": "master_locked",
+      "finalclass": "SynchroAttribute",
+      "friendlyname": "release_date"
+    },
+    {
+      "attcode": "requestor_id",
+      "update": "0",
+      "reconcile": "0",
+      "update_policy": "master_locked",
+      "reconciliation_attcode": "",
+      "finalclass": "SynchroAttExtKey",
+      "friendlyname": "requestor_id"
+    },
+    {
+      "attcode": "scan_cnx_refused_enabled",
+      "update": "0",
+      "reconcile": "0",
+      "update_policy": "master_locked",
+      "finalclass": "SynchroAttribute",
+      "friendlyname": "scan_cnx_refused_enabled"
+    },
+    {
+      "attcode": "scan_discovered",
+      "update": "1",
+      "reconcile": "0",
+      "update_policy": "master_locked",
+      "finalclass": "SynchroAttribute",
+      "friendlyname": "scan_discovered"
+    },
+    {
+      "attcode": "scan_duration",
+      "update": "1",
+      "reconcile": "0",
+      "update_policy": "master_locked",
+      "finalclass": "SynchroAttribute",
+      "friendlyname": "scan_duration"
+    },
+    {
+      "attcode": "scan_enabled",
+      "update": "0",
+      "reconcile": "0",
+      "update_policy": "master_locked",
+      "finalclass": "SynchroAttribute",
+      "friendlyname": "scan_enabled"
+    },
+    {
+      "attcode": "status",
+      "update": "0",
+      "reconcile": "0",
+      "update_policy": "master_locked",
+      "finalclass": "SynchroAttribute",
+      "friendlyname": "status"
+    },
+    {
+      "attcode": "subnets_list",
+      "update": "0",
+      "reconcile": "0",
+      "update_policy": "master_locked",
+      "row_separator": "|",
+      "attribute_separator": ";",
+      "value_separator": ":",
+      "attribute_qualifier": "'",
+      "finalclass": "SynchroAttLinkSet",
+      "friendlyname": "subnets_list"
+    },
+    {
+      "attcode": "type",
+      "update": "0",
+      "reconcile": "0",
+      "update_policy": "master_locked",
+      "finalclass": "SynchroAttribute",
+      "friendlyname": "type"
+    },
+    {
+      "attcode": "vlans_list",
+      "update": "0",
+      "reconcile": "0",
+      "update_policy": "master_locked",
+      "row_separator": "|",
+      "attribute_separator": ";",
+      "value_separator": ":",
+      "attribute_qualifier": "'",
+      "finalclass": "SynchroAttLinkSet",
+      "friendlyname": "vlans_list"
+    },
+    {
+      "attcode": "vrfs_list",
+      "update": "0",
+      "reconcile": "0",
+      "update_policy": "master_locked",
+      "row_separator": "|",
+      "attribute_separator": ";",
+      "value_separator": ":",
+      "attribute_qualifier": "'",
+      "finalclass": "SynchroAttLinkSet",
+      "friendlyname": "vrfs_list"
+    },
+    {
+      "attcode": "write_reason",
+      "update": "0",
+      "reconcile": "0",
+      "update_policy": "master_locked",
+      "finalclass": "SynchroAttribute",
+      "friendlyname": "write_reason"
+    }
+  ],
+  "user_delete_policy": "everybody",
+  "url_icon": "",
+  "url_application": ""
 }
