@@ -1,43 +1,36 @@
 <?php
-// Copyright (C) 2014 Combodo SARL
-//
-//   This application is free software; you can redistribute it and/or modify	
-//   it under the terms of the GNU Affero General Public License as published by
-//   the Free Software Foundation, either version 3 of the License, or
-//   (at your option) any later version.
-//
-//   iTop is distributed in the hope that it will be useful,
-//   but WITHOUT ANY WARRANTY; without even the implied warranty of
-//   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//   GNU Affero General Public License for more details.
-//
-//   You should have received a copy of the GNU Affero General Public License
-//   along with this application. If not, see <http://www.gnu.org/licenses/>
+/*
+ * @copyright   Copyright (C) 2022 TeemIp
+ * @license     http://opensource.org/licenses/AGPL-3.0
+ */
 
 class TeemIpDiscoveryIPv4SubnetCollector extends Collector
 {
 	protected $iIndex;
 	static protected $aIPv4Subnet;
 
+	/**
+	 * @throws \Exception
+	 */
 	public function __construct()
 	{
 		parent::__construct();
-		
+
 		$this->iIndex = 0;
 		self::$aIPv4Subnet = array();
 	}
 
+	/**
+	 * @return void
+	 */
 	public static function GetSubnets()
 	{
 		// Read updated subnet list from discovery activity that just took place
 		$aIPv4SubnetsList = TeemIpDiscoveryIPv4Collector::GetUpdatedSubnetList();
 
-//		self::$aIPv4Subnet = array();
 		$index = 0;
-		foreach ($aIPv4SubnetsList as $sSubnetIp => $aIPv4Subnet)
-		{
-			if ($aIPv4Subnet['ipdiscovery_enabled'])
-			{
+		foreach ($aIPv4SubnetsList as $sSubnetIp => $aIPv4Subnet) {
+			if ($aIPv4Subnet['ipdiscovery_enabled'] == 'yes') {
 				self::$aIPv4Subnet[$index]['ip'] = $sSubnetIp;
 				self::$aIPv4Subnet[$index]['org_id'] = $aIPv4Subnet['org_id'];
 				self::$aIPv4Subnet[$index]['last_discovery_date'] = $aIPv4Subnet['last_discovery_date'];
@@ -53,21 +46,29 @@ class TeemIpDiscoveryIPv4SubnetCollector extends Collector
 
 	}
 
+	/**
+	 * @inheritdoc
+	 */
 	public function Prepare()
 	{
 		$bRet = parent::Prepare();
-		if (!$bRet) return false;
+		if (!$bRet) {
+			return false;
+		}
 
 		$this->GetSubnets();
 
 		$this->iIndex = 0;
+
 		return true;
 	}
 
+	/**
+	 * @inheritdoc
+	 */
 	public function fetch()
 	{
-		if ($this->iIndex < count(self::$aIPv4Subnet))
-		{
+		if ($this->iIndex < count(self::$aIPv4Subnet)) {
 			$aDatas = array();
 			$aDatas['primary_key'] = self::$aIPv4Subnet[$this->iIndex]['ip'];
 			$aDatas['ip'] = self::$aIPv4Subnet[$this->iIndex]['ip'];
@@ -83,6 +84,7 @@ class TeemIpDiscoveryIPv4SubnetCollector extends Collector
 
 			return $aDatas;
 		}
+
 		return false;
 	}
 
