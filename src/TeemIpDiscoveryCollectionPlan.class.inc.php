@@ -1,4 +1,8 @@
 <?php
+/*
+ * @copyright   Copyright (C) 2023 TeemIp
+ * @license     http://opensource.org/licenses/AGPL-3.0
+ */
 
 require_once(APPROOT.'core/collectionplan.class.inc.php');
 
