@@ -21,16 +21,21 @@
       "update": "0",
       "reconcile": "0",
       "update_policy": "master_locked",
-      "finalclass": "SynchroAttribute",
-      "friendlyname": "alarm_water_mark"
+      "finalclass": "SynchroAttribute"
     },
     {
       "attcode": "allocation_date",
       "update": "0",
       "reconcile": "0",
       "update_policy": "master_locked",
-      "finalclass": "SynchroAttribute",
-      "friendlyname": "allocation_date"
+      "finalclass": "SynchroAttribute"
+    },
+    {
+      "attcode": "allow_automatic_ip_creation",
+      "update": "0",
+      "reconcile": "0",
+      "update_policy": "master_locked",
+      "finalclass": "SynchroAttribute"
     },
     {
       "attcode": "block_id",
@@ -38,24 +43,21 @@
       "reconcile": "0",
       "update_policy": "master_locked",
       "reconciliation_attcode": "",
-      "finalclass": "SynchroAttExtKey",
-      "friendlyname": "block_id"
+      "finalclass": "SynchroAttExtKey"
     },
     {
       "attcode": "broadcastip",
       "update": "0",
       "reconcile": "0",
       "update_policy": "master_locked",
-      "finalclass": "SynchroAttribute",
-      "friendlyname": "broadcastip"
+      "finalclass": "SynchroAttribute"
     },
     {
       "attcode": "comment",
       "update": "0",
       "reconcile": "0",
       "update_policy": "master_locked",
-      "finalclass": "SynchroAttribute",
-      "friendlyname": "comment"
+      "finalclass": "SynchroAttribute"
     },
     {
       "attcode": "contact_list",
@@ -66,8 +68,14 @@
       "attribute_separator": ";",
       "value_separator": ":",
       "attribute_qualifier": "'",
-      "finalclass": "SynchroAttLinkSet",
-      "friendlyname": "contact_list"
+      "finalclass": "SynchroAttLinkSet"
+    },
+    {
+      "attcode": "dhcp_range_discovery_enabled",
+      "update": "0",
+      "reconcile": "0",
+      "update_policy": "master_locked",
+      "finalclass": "SynchroAttribute"
     },
     {
       "attcode": "document_list",
@@ -78,49 +86,43 @@
       "attribute_separator": ";",
       "value_separator": ":",
       "attribute_qualifier": "'",
-      "finalclass": "SynchroAttLinkSet",
-      "friendlyname": "document_list"
+      "finalclass": "SynchroAttLinkSet"
     },
     {
       "attcode": "gatewayip",
       "update": "0",
       "reconcile": "0",
       "update_policy": "master_locked",
-      "finalclass": "SynchroAttribute",
-      "friendlyname": "gatewayip"
+      "finalclass": "SynchroAttribute"
     },
     {
       "attcode": "ip",
       "update": "0",
       "reconcile": "1",
       "update_policy": "master_locked",
-      "finalclass": "SynchroAttribute",
-      "friendlyname": "ip"
-    },
-    {
-      "attcode": "ipconfig_id",
-      "update": "0",
-      "reconcile": "0",
-      "update_policy": "master_unlocked",
-      "reconciliation_attcode": "",
-      "finalclass": "SynchroAttExtKey",
-      "friendlyname": "ipconfig_id"
+      "finalclass": "SynchroAttribute"
     },
     {
       "attcode": "ip_occupancy",
       "update": "0",
       "reconcile": "0",
       "update_policy": "master_locked",
-      "finalclass": "SynchroAttribute",
-      "friendlyname": "ip_occupancy"
+      "finalclass": "SynchroAttribute"
+    },
+    {
+      "attcode": "ipconfig_id",
+      "update": "1",
+      "reconcile": "0",
+      "update_policy": "master_unlocked",
+      "reconciliation_attcode": "",
+      "finalclass": "SynchroAttExtKey"
     },
     {
       "attcode": "ipdiscovery_enabled",
       "update": "0",
       "reconcile": "0",
       "update_policy": "master_locked",
-      "finalclass": "SynchroAttribute",
-      "friendlyname": "ipdiscovery_enabled"
+      "finalclass": "SynchroAttribute"
     },
     {
       "attcode": "ipdiscovery_id",
@@ -128,40 +130,42 @@
       "reconcile": "0",
       "update_policy": "master_locked",
       "reconciliation_attcode": "",
-      "finalclass": "SynchroAttExtKey",
-      "friendlyname": "ipdiscovery_id"
+      "finalclass": "SynchroAttExtKey"
     },
     {
       "attcode": "iplookup_discovered",
       "update": "1",
       "reconcile": "0",
       "update_policy": "master_locked",
-      "finalclass": "SynchroAttribute",
-      "friendlyname": "iplookup_discovered"
+      "finalclass": "SynchroAttribute"
     },
     {
       "attcode": "iplookup_duration",
       "update": "1",
       "reconcile": "0",
       "update_policy": "master_locked",
-      "finalclass": "SynchroAttribute",
-      "friendlyname": "iplookup_duration"
+      "finalclass": "SynchroAttribute"
     },
     {
       "attcode": "iplookup_enabled",
       "update": "0",
       "reconcile": "0",
       "update_policy": "master_locked",
-      "finalclass": "SynchroAttribute",
-      "friendlyname": "iplookup_enabled"
+      "finalclass": "SynchroAttribute"
+    },
+    {
+      "attcode": "ipv4_gateway_ip_format",
+      "update": "0",
+      "reconcile": "0",
+      "update_policy": "master_locked",
+      "finalclass": "SynchroAttribute"
     },
     {
       "attcode": "last_discovery_date",
       "update": "1",
       "reconcile": "0",
       "update_policy": "master_locked",
-      "finalclass": "SynchroAttribute",
-      "friendlyname": "last_discovery_date"
+      "finalclass": "SynchroAttribute"
     },
     {
       "attcode": "location_list",
@@ -172,24 +176,21 @@
       "attribute_separator": ";",
       "value_separator": ":",
       "attribute_qualifier": "'",
-      "finalclass": "SynchroAttLinkSet",
-      "friendlyname": "location_list"
+      "finalclass": "SynchroAttLinkSet"
     },
     {
       "attcode": "mask",
       "update": "0",
       "reconcile": "0",
       "update_policy": "master_locked",
-      "finalclass": "SynchroAttribute",
-      "friendlyname": "mask"
+      "finalclass": "SynchroAttribute"
     },
     {
       "attcode": "name",
       "update": "0",
       "reconcile": "0",
       "update_policy": "master_locked",
-      "finalclass": "SynchroAttribute",
-      "friendlyname": "name"
+      "finalclass": "SynchroAttribute"
     },
     {
       "attcode": "org_id",
@@ -197,48 +198,42 @@
       "reconcile": "1",
       "update_policy": "master_locked",
       "reconciliation_attcode": "",
-      "finalclass": "SynchroAttExtKey",
-      "friendlyname": "org_id"
+      "finalclass": "SynchroAttExtKey"
     },
     {
       "attcode": "ping_discovered",
       "update": "1",
       "reconcile": "0",
       "update_policy": "master_locked",
-      "finalclass": "SynchroAttribute",
-      "friendlyname": "ping_discovered"
+      "finalclass": "SynchroAttribute"
     },
     {
       "attcode": "ping_duration",
       "update": "1",
       "reconcile": "0",
       "update_policy": "master_locked",
-      "finalclass": "SynchroAttribute",
-      "friendlyname": "ping_duration"
+      "finalclass": "SynchroAttribute"
     },
     {
       "attcode": "ping_enabled",
       "update": "0",
       "reconcile": "0",
       "update_policy": "master_locked",
-      "finalclass": "SynchroAttribute",
-      "friendlyname": "ping_enabled"
+      "finalclass": "SynchroAttribute"
     },
     {
       "attcode": "range_occupancy",
       "update": "0",
       "reconcile": "0",
       "update_policy": "master_locked",
-      "finalclass": "SynchroAttribute",
-      "friendlyname": "range_occupancy"
+      "finalclass": "SynchroAttribute"
     },
     {
       "attcode": "release_date",
       "update": "0",
       "reconcile": "0",
       "update_policy": "master_locked",
-      "finalclass": "SynchroAttribute",
-      "friendlyname": "release_date"
+      "finalclass": "SynchroAttribute"
     },
     {
       "attcode": "requestor_id",
@@ -246,48 +241,49 @@
       "reconcile": "0",
       "update_policy": "master_locked",
       "reconciliation_attcode": "",
-      "finalclass": "SynchroAttExtKey",
-      "friendlyname": "requestor_id"
+      "finalclass": "SynchroAttExtKey"
+    },
+    {
+      "attcode": "reserve_subnet_ips",
+      "update": "0",
+      "reconcile": "0",
+      "update_policy": "master_locked",
+      "finalclass": "SynchroAttribute"
     },
     {
       "attcode": "scan_cnx_refused_enabled",
       "update": "0",
       "reconcile": "0",
       "update_policy": "master_locked",
-      "finalclass": "SynchroAttribute",
-      "friendlyname": "scan_cnx_refused_enabled"
+      "finalclass": "SynchroAttribute"
     },
     {
       "attcode": "scan_discovered",
       "update": "1",
       "reconcile": "0",
       "update_policy": "master_locked",
-      "finalclass": "SynchroAttribute",
-      "friendlyname": "scan_discovered"
+      "finalclass": "SynchroAttribute"
     },
     {
       "attcode": "scan_duration",
       "update": "1",
       "reconcile": "0",
       "update_policy": "master_locked",
-      "finalclass": "SynchroAttribute",
-      "friendlyname": "scan_duration"
+      "finalclass": "SynchroAttribute"
     },
     {
       "attcode": "scan_enabled",
       "update": "0",
       "reconcile": "0",
       "update_policy": "master_locked",
-      "finalclass": "SynchroAttribute",
-      "friendlyname": "scan_enabled"
+      "finalclass": "SynchroAttribute"
     },
     {
       "attcode": "status",
       "update": "0",
       "reconcile": "0",
       "update_policy": "master_locked",
-      "finalclass": "SynchroAttribute",
-      "friendlyname": "status"
+      "finalclass": "SynchroAttribute"
     },
     {
       "attcode": "subnets_list",
@@ -298,16 +294,14 @@
       "attribute_separator": ";",
       "value_separator": ":",
       "attribute_qualifier": "'",
-      "finalclass": "SynchroAttLinkSet",
-      "friendlyname": "subnets_list"
+      "finalclass": "SynchroAttLinkSet"
     },
     {
       "attcode": "type",
       "update": "0",
       "reconcile": "0",
       "update_policy": "master_locked",
-      "finalclass": "SynchroAttribute",
-      "friendlyname": "type"
+      "finalclass": "SynchroAttribute"
     },
     {
       "attcode": "vlans_list",
@@ -318,8 +312,7 @@
       "attribute_separator": ";",
       "value_separator": ":",
       "attribute_qualifier": "'",
-      "finalclass": "SynchroAttLinkSet",
-      "friendlyname": "vlans_list"
+      "finalclass": "SynchroAttLinkSet"
     },
     {
       "attcode": "vrfs_list",
@@ -330,16 +323,14 @@
       "attribute_separator": ";",
       "value_separator": ":",
       "attribute_qualifier": "'",
-      "finalclass": "SynchroAttLinkSet",
-      "friendlyname": "vrfs_list"
+      "finalclass": "SynchroAttLinkSet"
     },
     {
       "attcode": "write_reason",
       "update": "0",
       "reconcile": "0",
       "update_policy": "master_locked",
-      "finalclass": "SynchroAttribute",
-      "friendlyname": "write_reason"
+      "finalclass": "SynchroAttribute"
     }
   ],
   "user_delete_policy": "everybody",
