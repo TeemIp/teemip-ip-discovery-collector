@@ -1,15 +1,11 @@
 <?php
 /*
- * @copyright   Copyright (C) 2022 TeemIp
+ * @copyright   Copyright (C) 2023 TeemIp
  * @license     http://opensource.org/licenses/AGPL-3.0
  */
 
-require_once(APPROOT.'collectors/TeemIpDiscoveryIPv4Collector.class.inc.php');
-require_once(APPROOT.'collectors/TeemIpDiscoveryIPv4SubnetCollector.class.inc.php');
-require_once(APPROOT.'collectors/TeemIpDiscoveryIPApplicationCollector.class.inc.php');
-
-$index = 1;
-Orchestrator::AddCollector($index++, 'TeemIpDiscoveryIPv4Collector');
-Orchestrator::AddCollector($index++, 'TeemIpDiscoveryIPv4SubnetCollector');
-Orchestrator::AddCollector($index++, 'TeemIpDiscoveryIPApplicationCollector');
+// Initialize collection plan
+require_once(APPROOT.'collectors/src/TeemIpDiscoveryCollectionPlan.class.inc.php');
+require_once(APPROOT.'core/orchestrator.class.inc.php');
+Orchestrator::UseCollectionPlan('TeemIpDiscoveryCollectionPlan');
 

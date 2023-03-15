@@ -5,7 +5,30 @@
 	<itop_url>my-itop-url</itop_url>
 	<itop_login>admin</itop_login>
 	<itop_password>admin</itop_password>
-	
+
+	<!-- Class collection sequence -->
+	<collectors_launch_sequence type="array">
+		<!-- Warning: order is important for some classes: 1 to 3 and , the ones listed with numbers or letters; alphabetical order is ok for others -->
+		<!-- IPv4 addresses -->
+		<collector>
+	      <name>TeemIpDiscoveryIPv4Collector</name>
+	      <enable>yes</enable>
+	      <rank>1</rank>
+	    </collector>
+		<!-- IPv4 subnets -->
+		<collector>
+	      <name>TeemIpDiscoveryIPv4SubnetCollector</name>
+	      <enable>yes</enable>
+	      <rank>2</rank>
+	    </collector>
+		<!-- IP applications -->
+		<collector>
+	      <name>TeemIpDiscoveryIPApplicationCollector</name>
+	      <enable>yes</enable>
+	      <rank>3</rank>
+	    </collector>
+	</collectors_launch_sequence>
+
 	<!-- Synchronization parameters -->
 	<contact_to_notify></contact_to_notify>
 	<synchro_user>admin</synchro_user>
