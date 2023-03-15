@@ -8,7 +8,6 @@
 
 	<!-- Class collection sequence -->
 	<collectors_launch_sequence type="array">
-		<!-- Warning: order is important for some classes: 1 to 3 and , the ones listed with numbers or letters; alphabetical order is ok for others -->
 		<!-- IPv4 addresses -->
 		<collector>
 	      <name>TeemIpDiscoveryIPv4Collector</name>
@@ -45,8 +44,8 @@
 	<ip_default_view></ip_default_view>
 
 	<!-- Absolute path for ping command - "ping" will be executed with no path if not provided-->
-	<ping_absolute_path></ping_absolute_path>
+	<ping_absolute_path>/bin/</ping_absolute_path>
 	<!-- Absolute path for dig command - "dig" will be executed with no path if not provided-->
-	<dig_absolute_path></dig_absolute_path>
+	<dig_absolute_path>/usr/bin/</dig_absolute_path>
   
 </parameters>
