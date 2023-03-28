@@ -301,9 +301,9 @@ class TeemIpDiscoveryIPv4Collector extends Collector
 						$bIPResolves = false;
 						$aOutput = array();
 						if ($this->aIPDiscoveryAttributes['dns1'] != '') {
-							$LookupResult = exec($sDigCmd.' -x '.$sIp.'@'.$this->aIPDiscoveryAttributes['dns1'], $aOutput, $sStatus);
+							$LookupResult = exec($sDigCmd.' -x '.$sIp.' @'.$this->aIPDiscoveryAttributes['dns1'], $aOutput, $sStatus);
 						} else {
-							$LookupResult = exec('dig -x '.$sIp, $aOutput, $sStatus);
+							$LookupResult = exec($sDigCmd.' -x '.$sIp, $aOutput, $sStatus);
 						}
 						// Look for the "Got answer section"
 						$aAnswerPosition = array_keys($aOutput, ";; Got answer:");
@@ -313,7 +313,7 @@ class TeemIpDiscoveryIPv4Collector extends Collector
 								$bIPResolves = true;
 							}
 						} elseif ($this->aIPDiscoveryAttributes['dns2'] != '') {
-							$LookupResult = exec('dig -x '.$sIp.'@'.$this->aIPDiscoveryAttributes['dns2'], $aOutput, $sStatus);
+							$LookupResult = exec($sDigCmd.' -x '.$sIp.' @'.$this->aIPDiscoveryAttributes['dns2'], $aOutput, $sStatus);
 							// Look for the "Got answer section"
 							$aAnswerPosition = array_keys($aOutput, ";; Got answer:");
 							if (!empty($aAnswerPosition)) {
@@ -438,7 +438,7 @@ class TeemIpDiscoveryIPv4Collector extends Collector
 							//    which means that the operating system does not try to establish a link for the socket
 							//    until it actually needs to send or receive data.
 							case 'udp':
-								$Resource = @fsockopen("udp://".$sIp, $this->aIPDiscoveryAttributes['port_number'], $errno, $errstr, $iScanTimeout);
+								$Resource = @fsockopen("udp://".$sIp, $this->aIPDiscoveryAttributes['port_number'], $errno, $errstr, floatval($iScanTimeout));
 								if ($Resource) {
 									socket_set_timeout($Resource, $iScanTimeout);
 									$iInitialTime = time();
@@ -451,7 +451,7 @@ class TeemIpDiscoveryIPv4Collector extends Collector
 								break;
 
 							case 'tcp':
-								$ScanResult = @fsockopen("tcp://".$sIp, $this->aIPDiscoveryAttributes['port_number'], $errno, $errstr, $iScanTimeout);
+								$ScanResult = @fsockopen("tcp://".$sIp, $this->aIPDiscoveryAttributes['port_number'], $errno, $errstr, floatval($iScanTimeout));
 								if ($ScanResult) {
 									fclose($ScanResult);
 								}
@@ -459,7 +459,7 @@ class TeemIpDiscoveryIPv4Collector extends Collector
 
 							case 'both':
 							default:
-							$Resource = @fsockopen("udp://".$sIp, $this->aIPDiscoveryAttributes['port_number'], $errno, $errstr, $iScanTimeout);
+							$Resource = @fsockopen("udp://".$sIp, $this->aIPDiscoveryAttributes['port_number'], $errno, $errstr, floatval($iScanTimeout));
 								if ($Resource) {
 									socket_set_timeout($Resource, $iScanTimeout);
 									$iInitialTime = time();
@@ -468,7 +468,7 @@ class TeemIpDiscoveryIPv4Collector extends Collector
 									$ScanResult = (time() >= $iInitialTime + $iScanTimeout) ? false : true;
 								}
 								if (!$ScanResult) {
-									$ScanResult = @fsockopen("tcp://".$sIp, $this->aIPDiscoveryAttributes['port_number'], $errno, $errstr, $iScanTimeout);
+									$ScanResult = @fsockopen("tcp://".$sIp, $this->aIPDiscoveryAttributes['port_number'], $errno, $errstr, floatval($iScanTimeout));
 									if ($ScanResult) {
 										fclose($ScanResult);
 									}
