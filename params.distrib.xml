@@ -33,7 +33,7 @@
 	<synchro_user>admin</synchro_user>
 	<json_placeholders>
 		<!-- IP Discovery Application UUID -->
-		<discovery_application_uuid>1234767</discovery_application_uuid>
+		<discovery_application_uuid>0123_4567_89AB_CDEF</discovery_application_uuid>
 		<!-- Name of synchronization data sources -->
 		<ipv4_synchro_name>TeemIp IPv4 Discovery</ipv4_synchro_name>
 		<subnetv4_synchro_name>TeemIp IPv4 Subnet Discovery</subnetv4_synchro_name>
