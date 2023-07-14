@@ -10,6 +10,7 @@ class TeemIpDiscoveryIPv4Collector extends Collector
 	protected $sIPDefaultStatus;
 	protected $sIPDefaultView;
 	protected $sPingPath;
+	protected $sFpingPath;
 	protected $sDigPath;
 	protected $aIPv4;
 	protected $oCollectionPlan;
@@ -27,6 +28,7 @@ class TeemIpDiscoveryIPv4Collector extends Collector
 		$this->sIPDefaultStatus = Utils::GetConfigurationValue('ip_default_status', 'unassigned');
 		$this->sIPDefaultView = Utils::GetConfigurationValue('ip_default_view', '');
 		$this->sPingPath = Utils::GetConfigurationValue('ping_absolute_path', '');
+		$this->sFpingPath = Utils::GetConfigurationValue('fping_absolute_path', '');
 		$this->sDigPath = Utils::GetConfigurationValue('dig_absolute_path', '');
 		$this->aIPv4 = [];
 
@@ -174,6 +176,20 @@ class TeemIpDiscoveryIPv4Collector extends Collector
 	 */
 	protected function PingIpv4Ips($sTimeStamp)
 	{
+		// Check if fping or ping command are available
+		exec($this->sFpingPath.'fping -v', $aOutput, $iStatus);
+		if ($iStatus == 127)
+		{
+			exec($this->sPingPath.'ping -V', $aOutput, $iStatus);
+			if ($iStatus == 127)
+			{
+				Utils::Log(LOG_ERR, "Ping command or fping command not found");
+				return;
+			}
+			$sPingCmd = $this->sPingPath.'ping';
+		}
+		else $sFpingCmd = $this->sFpingPath.'fping';
+
 		foreach ($this->aIPv4SubnetsList as $sSubnetIp => $aIPv4Subnet) {
 			if ($aIPv4Subnet['ipdiscovery_enabled'] != 'yes') {
 				continue;
@@ -190,8 +206,13 @@ class TeemIpDiscoveryIPv4Collector extends Collector
 				}
 				$iNbIPsThatPing = 0;
 				$iStartTime = time();
-				$sPingCmd = $this->sPingPath."ping";
+				$iStatus = -1;
+				$aFPingResults = [];
 				Utils::Log(LOG_INFO, "Start to ping subnet: ".$sSubnetIp);
+
+				// fping if available
+				if (isset($sFpingCmd)) exec(sprintf('%s -r1 -t%d -ga %s %s', $sFpingCmd, $iTimeOut*1000, long2ip($iIp), $aIPv4Subnet['broadcastip']), $aFPingResults);
+
 				while ($iIp < $iBroadcastIp) {
 					$sIp = long2ip($iIp);
 					// Skip DHCP IP if required
@@ -207,8 +228,8 @@ class TeemIpDiscoveryIPv4Collector extends Collector
 						}
 						Utils::Log(LOG_DEBUG, "DHCP ".$sIp." has not been pinged");
 					} else {
-						$PingResult = exec($sPingCmd.' -c 1 -W '.$iTimeOut.' '.$sIp, $aOutput, $sStatus);
-						if ($sStatus == 0) {
+						if (isset($sPingCmd)) exec($sPingCmd.' -c 1 -W '.$iTimeOut.' '.$sIp, $aOutput, $iStatus);
+						if ($iStatus == 0 or in_array($sIp, $aFPingResults)) {
 							// IP is alive
 							if (array_key_exists($sIp, $this->aIPv4)) {
 								// Change data anyway as time stamp changes
