@@ -107,7 +107,7 @@ class TeemIpDiscoveryCollectionPlan extends CollectionPlan
 				Utils::Log(LOG_INFO, "IP Discovery Application has UUID ".$this->aDiscoveryApplication['UUID'].".");
 			} else {
 				$this->aDiscoveryApplication['UUID'] = '';
-				Utils::Log(LOG_INFO, "Discovery can not proceed as no IP Discovery Application UUID has been defined.");
+				Utils::Log(LOG_ERR, "Discovery can not proceed as no IP Discovery Application UUID has been defined.");
 			}
 
 			// Get discovery parameters
