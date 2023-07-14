@@ -102,7 +102,7 @@ class TeemIpDiscoveryCollectionPlan extends CollectionPlan
 
 			// Get Discovery application UUID
 			$aOtherPlaceholders = Utils::GetConfigurationValue('json_placeholders', []);
-			if (array_key_exists('discovery_application_uuid', $aOtherPlaceholders)) {
+			if (array_key_exists('discovery_application_uuid', $aOtherPlaceholders) && !empty($aOtherPlaceholders['discovery_application_uuid'])) {
 				$this->aDiscoveryApplication['UUID'] = $aOtherPlaceholders['discovery_application_uuid'];
 				Utils::Log(LOG_INFO, "IP Discovery Application has UUID ".$this->aDiscoveryApplication['UUID'].".");
 			} else {
@@ -122,6 +122,17 @@ class TeemIpDiscoveryCollectionPlan extends CollectionPlan
 	}
 
 	/**
+	 * No collectors are added if no application parameters could be found.
+	 * @inheritDoc
+	 */
+	public function AddCollectorsToOrchestrator(): bool
+	{
+		if (empty($this->aDiscoveryApplication['UUID']) || empty($this->aDiscoveryApplication['params'])) return false;
+
+		return parent::AddCollectorsToOrchestrator();
+	}
+
+	/**
 	 * Retrieve the IP Discovery object from iTop based on given UUID
 	 * Read discovery parameters and list of subnets to be discovered
 	 *
@@ -130,6 +141,8 @@ class TeemIpDiscoveryCollectionPlan extends CollectionPlan
 	 */
 	protected function GetDiscoveryParameters($sApplicationUUID): array
 	{
+		$aIPDiscoveryAttributes = [];
+		$aIPv4SubnetsList = [];
 		$bResult = true;
 		try {
 			$oRestClient = new RestClient();
@@ -138,19 +151,16 @@ class TeemIpDiscoveryCollectionPlan extends CollectionPlan
 				Utils::Log(LOG_ERR, "{$aResult['message']} ({$aResult['code']})");
 				$bResult = false;
 			} else {
-				switch (count($aResult['objects'])) {
-					case 0:
-						// Not found, error
-						Utils::Log(LOG_INFO, "There is no IP Discovery Application with UUID ".$sApplicationUUID." in iTop.");
-						$bResult = false;
-						break;
-
+				if (empty($aResult['objects'])) {
+					// Not found, error
+					Utils::Log(LOG_WARNING, "There is no IP Discovery Application with UUID ".$sApplicationUUID." in iTop.");
+					$bResult = false;
+				} else switch (count($aResult['objects'])) {
 					case 1:
 						Utils::Log(LOG_INFO, "An IP Discovery Application with UUID ".$sApplicationUUID." has been found in iTop.");
 						$aData = reset($aResult['objects']);
 						$aIPDiscoveryAttributes = $aData['fields'];
 
-						$aIPv4SubnetsList = [];
 						foreach ($aIPDiscoveryAttributes['ipv4subnets_list'] as $sSubnetKey => $aIPv4Subnet) {
 							$sIndex = $aIPv4Subnet['ip'];
 							if (array_key_exists('ipdiscovery_enabled', $aIPv4Subnet)) {
