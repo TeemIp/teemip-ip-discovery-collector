@@ -45,6 +45,8 @@
 
 	<!-- Absolute path for ping command - "ping" will be executed with no path if not provided-->
 	<ping_absolute_path>/bin/</ping_absolute_path>
+	<!-- Absolute path for fping command - "fping" will be executed with no path if not provided-->
+	<fping_absolute_path>/usr/sbin/</fping_absolute_path>
 	<!-- Absolute path for dig command - "dig" will be executed with no path if not provided-->
 	<dig_absolute_path>/usr/bin/</dig_absolute_path>
   
