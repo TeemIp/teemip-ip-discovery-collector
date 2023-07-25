@@ -104,7 +104,7 @@ class TeemIpDiscoveryCollectionPlan extends CollectionPlan
 			$aOtherPlaceholders = Utils::GetConfigurationValue('json_placeholders', []);
 			if (array_key_exists('discovery_application_uuid', $aOtherPlaceholders) && !empty($aOtherPlaceholders['discovery_application_uuid'])) {
 				$this->aDiscoveryApplication['UUID'] = $aOtherPlaceholders['discovery_application_uuid'];
-				Utils::Log(LOG_INFO, "IP Discovery Application has UUID ".$this->aDiscoveryApplication['UUID'].".");
+				Utils::Log(LOG_INFO, "Requested IP Discovery Application's UUID is ".$this->aDiscoveryApplication['UUID'].".");
 			} else {
 				$this->aDiscoveryApplication['UUID'] = '';
 				Utils::Log(LOG_ERR, "Discovery can not proceed as no IP Discovery Application UUID has been defined.");
