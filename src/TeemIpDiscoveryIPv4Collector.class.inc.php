@@ -178,17 +178,13 @@ class TeemIpDiscoveryIPv4Collector extends Collector
 	{
 		// Check if fping or ping command are available
 		exec($this->sFpingPath.'fping -v', $aOutput, $iStatus);
-		if ($iStatus == 127)
-		{
+		if ($iStatus == 127) {
 			exec($this->sPingPath.'ping -V', $aOutput, $iStatus);
-			if ($iStatus == 127)
-			{
+			if ($iStatus == 127) {
 				Utils::Log(LOG_ERR, "Ping command or fping command not found");
 				return;
-			}
-			$sPingCmd = $this->sPingPath.'ping';
-		}
-		else $sFpingCmd = $this->sFpingPath.'fping';
+			} else $sPingCmd = $this->sPingPath.'ping';
+		} else $sFpingCmd = $this->sFpingPath.'fping';
 
 		foreach ($this->aIPv4SubnetsList as $sSubnetIp => $aIPv4Subnet) {
 			if ($aIPv4Subnet['ipdiscovery_enabled'] != 'yes') {
