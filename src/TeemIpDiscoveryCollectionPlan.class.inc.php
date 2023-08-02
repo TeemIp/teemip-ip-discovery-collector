@@ -12,6 +12,7 @@ class TeemIpDiscoveryCollectionPlan extends CollectionPlan
 	private $bTeemIpIpDiscoveryIsInstalled;
 	private $bTeemIpNMEIsInstalled;
 	private $bTeemIpZoneMgmtIsInstalled;
+	private $bTeemIpIPRequestMgmtIsInstalled;
 	private $aDiscoveryApplication;
 	private $aIPv4SubnetsList;
 
@@ -28,6 +29,7 @@ class TeemIpDiscoveryCollectionPlan extends CollectionPlan
 		$this->bTeemIpIpDiscoveryIsInstalled = false;
 		$this->bTeemIpNMEIsInstalled = false;
 		$this->bTeemIpZoneMgmtIsInstalled = false;
+		$this->bTeemIpIPRequestMgmtIsInstalled = false;
 		$oRestClient = new RestClient();
 		try {
 			$aResult = $oRestClient->Get('IPAddress', 'SELECT IPAddress WHERE id = 0');
@@ -82,7 +84,7 @@ class TeemIpDiscoveryCollectionPlan extends CollectionPlan
 				}
 			}
 
-			// Detects if TeemIp Zone Mgmt is installed or not
+			// Check if TeemIp Zone Mgmt is installed or not
 			$oRestClient = new RestClient();
 			try {
 				$aResult = $oRestClient->Get('Zone', 'SELECT Zone WHERE id = 0');
@@ -94,6 +96,24 @@ class TeemIpDiscoveryCollectionPlan extends CollectionPlan
 				}
 			} catch (Exception $e) {
 				$sMessage = 'TeemIp Zone Management is considered as NOT installed due to: '.$e->getMessage();
+				if (is_a($e, "IOException")) {
+					Utils::Log(LOG_ERR, $sMessage);
+					throw $e;
+				}
+			}
+
+			// Check if TeemIp IP Request Mgmt is installed or not
+			$oRestClient = new RestClient();
+			try {
+				$aResult = $oRestClient->Get('IPRequest', 'SELECT IPRequest WHERE id = 0');
+				if ($aResult['code'] == 0) {
+					$this->bTeemIpIPRequestMgmtIsInstalled = true;
+					Utils::Log(LOG_INFO, 'TeemIp IP Request Management extension is installed');
+				} else {
+					Utils::Log(LOG_INFO, 'TeemIp IP Request Management extension is NOT installed');
+				}
+			} catch (Exception $e) {
+				$sMessage = 'TeemIp IP Request Management is considered as NOT installed due to: '.$e->getMessage();
 				if (is_a($e, "IOException")) {
 					Utils::Log(LOG_ERR, $sMessage);
 					throw $e;
@@ -320,6 +340,16 @@ class TeemIpDiscoveryCollectionPlan extends CollectionPlan
 	public function IsTeemIpZoneMgmtInstalled(): bool
 	{
 		return $this->bTeemIpZoneMgmtIsInstalled;
+	}
+
+	/**
+	 * Check if TeemIp IP Request Management is installed
+	 *
+	 * @return bool
+	 */
+	public function IsTeemIpIPRequestMgmtInstalled(): bool
+	{
+		return $this->bTeemIpIPRequestMgmtIsInstalled;
 	}
 
 	/**
