@@ -53,6 +53,13 @@
 			"finalclass": "SynchroAttribute"
 		},
 		{
+			"attcode": "dhcp_range_discovery_enabled",
+			"update": "0",
+			"reconcile": "0",
+			"update_policy": "master_locked",
+			"finalclass": "SynchroAttribute"
+		},
+		{
 			"attcode": "dns1",
 			"update": "0",
 			"reconcile": "0",
@@ -157,6 +164,17 @@
 			"finalclass": "SynchroAttribute"
 		},
 		{
+			"attcode": "providercontracts_list",
+			"update": "0",
+			"reconcile": "0",
+			"update_policy": "master_locked",
+			"row_separator": "|",
+			"attribute_separator": ";",
+			"value_separator": ":",
+			"attribute_qualifier": "'",
+			"finalclass": "SynchroAttLinkSet"
+		},
+		{
 			"attcode": "scan_cnx_refused_enabled",
 			"update": "0",
 			"reconcile": "0",
@@ -176,6 +194,17 @@
 			"reconcile": "0",
 			"update_policy": "master_locked",
 			"finalclass": "SynchroAttribute"
+		},
+		{
+			"attcode": "services_list",
+			"update": "0",
+			"reconcile": "0",
+			"update_policy": "master_locked",
+			"row_separator": "|",
+			"attribute_separator": ";",
+			"value_separator": ":",
+			"attribute_qualifier": "'",
+			"finalclass": "SynchroAttLinkSet"
 		},
 		{
 			"attcode": "status",
