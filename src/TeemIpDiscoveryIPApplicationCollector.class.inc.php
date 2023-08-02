@@ -29,13 +29,27 @@ class TeemIpDiscoveryIPApplicationCollector extends Collector
 	 */
 	public function CheckToLaunch($aOrchestratedCollectors): bool
 	{
-		if (parent::CheckToLaunch($aOrchestratedCollectors)) {
-			if ($this->oCollectionPlan->IsTeemIpInstalled() && ($this->oCollectionPlan->GetApplicationParam('uuid') != '')) {
-				return true;
-			}
+		if (!parent::CheckToLaunch($aOrchestratedCollectors)) {
+			return false;
 		}
 
-		return false;
+		// Make sure that TeemIp is installed
+		if (!$this->oCollectionPlan->IsTeemIpInstalled()) {
+			Utils::Log(LOG_INFO, '> TeemIpDiscoveryIPApplicationCollector will not be launched as TeemIp is not installed');
+			return false;
+		}
+		// Make sure that a Discovery Application has been identified
+		if ($this->oCollectionPlan->GetApplicationParam('uuid') == '') {
+			Utils::Log(LOG_INFO, '> TeemIpDiscoveryIPApplicationCollector will not be launched as no IP Discovery Application has been found');
+			return false;
+		}
+		// Make sure subnets are collected first (i.e. already orchestrated)
+		if (!array_key_exists('TeemIpDiscoveryIPv4SubnetCollector', $aOrchestratedCollectors)) {
+			Utils::Log(LOG_INFO, '> TeemIpDiscoveryIPApplicationCollector will not be launched as no TeemIpDiscoveryIPv4SubnetCollector has been orchestrated yet. Please check launch sequence!');
+			return false;
+		}
+
+		return true;
 	}
 
 	/**
