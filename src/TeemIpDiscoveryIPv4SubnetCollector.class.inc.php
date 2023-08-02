@@ -53,7 +53,7 @@ class TeemIpDiscoveryIPv4SubnetCollector extends Collector
 			Utils::Log(LOG_INFO, '> TeemIpDiscoveryIPv4SubnetCollector will not be launched as no IP Discovery Application has been found');
 			return false;
 		}
-		// Make sure subnets are collected first (i.e. already orchestrated)
+		// Make sure IPs are collected first (i.e. already orchestrated)
 		if (!array_key_exists('TeemIpDiscoveryIPv4Collector', $aOrchestratedCollectors)) {
 			Utils::Log(LOG_INFO, '> TeemIpDiscoveryIPv4SubnetCollector will not be launched as no TeemIpDiscoveryIPv4Collector has been orchestrated yet. Please check launch sequence!');
 			return false;
