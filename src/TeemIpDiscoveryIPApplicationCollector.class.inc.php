@@ -41,6 +41,19 @@ class TeemIpDiscoveryIPApplicationCollector extends Collector
 	/**
 	 * @inheritdoc
 	 */
+	public function AttributeIsOptional($sAttCode)
+	{
+		if ($sAttCode == 'dhcp_range_discovery_enabled') return true;
+		if ($sAttCode == 'providercontracts_list') return true;
+		if ($sAttCode == 'services_list') return true;
+		if ($sAttCode == 'tickets_list') return true;
+
+		return parent::AttributeIsOptional($sAttCode);
+	}
+
+	/**
+	 * @inheritdoc
+	 */
 	public function Collect($iMaxChunkSize = 0): bool
 	{
 		Utils::Log(LOG_INFO, '----------------');
