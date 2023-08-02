@@ -11,6 +11,7 @@ class TeemIpDiscoveryIPv4Collector extends Collector
 	protected $sIPDefaultView;
 	protected $sPingPath;
 	protected $sFpingPath;
+	protected $bFpingEnable;
 	protected $sDigPath;
 	protected $aIPv4;
 	protected $oCollectionPlan;
@@ -29,6 +30,7 @@ class TeemIpDiscoveryIPv4Collector extends Collector
 		$this->sIPDefaultView = Utils::GetConfigurationValue('ip_default_view', '');
 		$this->sPingPath = Utils::GetConfigurationValue('ping_absolute_path', '');
 		$this->sFpingPath = Utils::GetConfigurationValue('fping_absolute_path', '');
+		$this->bFpingEnable = Utils::GetConfigurationValue('fping_enable', 'yes');
 		$this->sDigPath = Utils::GetConfigurationValue('dig_absolute_path', '');
 		$this->aIPv4 = [];
 
@@ -206,11 +208,11 @@ class TeemIpDiscoveryIPv4Collector extends Collector
 	{
 		// Check if fping or ping command are available
 		exec($this->sFpingPath.'fping -v', $aOutput, $iStatus);
-		if ($iStatus == 127) {
+		if (($this->bFpingEnable != 'yes') || ($iStatus == 127)) {
 			exec($this->sPingPath.'ping -V', $aOutput, $iStatus);
 			if ($iStatus == 127) {
 				Utils::Log(LOG_ERR, "Ping command or fping command not found");
-				return;
+					return;
 			} else $sPingCmd = $this->sPingPath.'ping';
 		} else $sFpingCmd = $this->sFpingPath.'fping';
 

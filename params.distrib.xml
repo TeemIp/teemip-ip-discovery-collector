@@ -49,5 +49,8 @@
 	<fping_absolute_path>/usr/bin/</fping_absolute_path>
 	<!-- Absolute path for dig command - "dig" will be executed with no path if not provided-->
 	<dig_absolute_path>/usr/bin/</dig_absolute_path>
+
+	<!-- fping usage may be disabled here -->
+	<fping_enable>yes</fping_enable>
   
 </parameters>
