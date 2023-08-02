@@ -194,7 +194,11 @@ class TeemIpDiscoveryCollectionPlan extends CollectionPlan
 								$aIPv4SubnetsList[$sIndex]['ipconfig_id'] = $aIPv4Subnet['ipconfig_id'];
 								$aIPv4SubnetsList[$sIndex]['gatewayip'] = $aIPv4Subnet['gatewayip'];
 								$aIPv4SubnetsList[$sIndex]['broadcastip'] = $aIPv4Subnet['broadcastip'];
-								$aIPv4SubnetsList[$sIndex]['dhcp_range_discovery_enabled'] = $aIPv4Subnet['dhcp_range_discovery_enabled'];
+								if (array_key_exists('Make usage of dhcp_range_discovery_enabled', $aIPv4Subnet)) {
+									$aIPv4SubnetsList[$sIndex]['dhcp_range_discovery_enabled'] = $aIPv4Subnet['dhcp_range_discovery_enabled'];
+								} else {
+									$aIPv4SubnetsList[$sIndex]['dhcp_range_discovery_enabled'] = 'yes';
+								}
 								$aIPv4SubnetsList[$sIndex]['ping_enabled'] = $aIPv4Subnet['ping_enabled'];
 								$aIPv4SubnetsList[$sIndex]['ping_duration'] = 0;
 								$aIPv4SubnetsList[$sIndex]['ping_discovered'] = 0;
