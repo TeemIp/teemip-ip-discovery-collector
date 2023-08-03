@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Default values for parameters. Do NOT alter this file, copy its content to conf/params.local.xml and edit it instead -->
+<!-- Default values for parameters. Do NOT alter this file, use params.local.xml instead -->
 <parameters>
-	<!-- TeemIp Application -->
-	<itop_url>my-itop-url</itop_url>
-	<itop_login>admin</itop_login>
-	<itop_password>admin</itop_password>
-
 	<!-- Class collection sequence -->
 	<collectors_launch_sequence type="array">
 		<!-- IPv4 addresses -->
@@ -29,8 +24,6 @@
 	</collectors_launch_sequence>
 
 	<!-- Synchronization parameters -->
-	<contact_to_notify></contact_to_notify>
-	<synchro_user>admin</synchro_user>
 	<json_placeholders>
 		<!-- IP Discovery Application UUID -->
 		<discovery_application_uuid>0123_4567_89AB_CDEF</discovery_application_uuid>
