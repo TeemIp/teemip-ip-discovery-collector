@@ -152,7 +152,9 @@ class TeemIpDiscoveryIPv4Collector extends Collector
 						$this->aIPv4[$sIp]['synchro_data']['org_id'] = $aIPAttributes['org_id'];
 						$this->aIPv4[$sIp]['synchro_data']['ipconfig_id'] = $aIPAttributes['ipconfig_id'];
 						$this->aIPv4[$sIp]['synchro_data']['status'] = $aIPAttributes['status'];
-						$this->aIPv4[$sIp]['synchro_data']['view_id'] = ($this->oCollectionPlan->IsTeemIpZoneMgmtInstalled()) ? $aIPAttributes['view_name'] : '';
+						if ($this->oCollectionPlan->IsTeemIpZoneMgmtInstalled()) {
+							$this->aIPv4[$sIp]['synchro_data']['view_id'] = $aIPAttributes['view_name'];
+						}
 						$this->aIPv4[$sIp]['synchro_data']['responds_to_ping'] = $aIPAttributes['responds_to_ping'];
 						$this->aIPv4[$sIp]['synchro_data']['responds_to_iplookup'] = $aIPAttributes['responds_to_iplookup'];
 						$this->aIPv4[$sIp]['synchro_data']['fqdn_from_iplookup'] = $aIPAttributes['fqdn_from_iplookup'];
