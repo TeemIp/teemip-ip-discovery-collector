@@ -114,19 +114,14 @@ class TeemIpDiscoveryIPv4Collector extends Collector
 	protected function GetRegisteredIps()
 	{
 		// Build OQL to retrieve IPs
-		$bStart = true;
-		$sOQL = "";
+		$aSubnetsToDiscover = [];
+		$sOQL = 'SELECT IPv4Address WHERE subnet_ip IN (%s)';
 		foreach ($this->aIPv4SubnetsList as $sSubnetIp => $aIPv4Subnet) {
 			if ($aIPv4Subnet['ipdiscovery_enabled'] == 'yes') {
-				if ($bStart) {
-					$sOQL = "SELECT IPv4Address WHERE subnet_ip IN ('".$sSubnetIp."'";
-					$bStart = false;
-				} else {
-					$sOQL .= ", '".$sSubnetIp."'";
-				}
+				$aSubnetsToDiscover[] = sprintf("'%s'", $sSubnetIp);
 			}
 		}
-		$sOQL .= ")";
+		$sOQL = sprintf($sOQL, implode(',', $aSubnetsToDiscover));
 
 		// Get IPs
 		$bResult = true;
