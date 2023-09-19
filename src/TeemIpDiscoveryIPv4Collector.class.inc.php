@@ -96,11 +96,7 @@ class TeemIpDiscoveryIPv4Collector extends Collector
 	 */
 	public function AttributeIsOptional($sAttCode)
 	{
-		if ($this->oCollectionPlan->IsTeemIpZoneMgmtInstalled()) {
-			if ($sAttCode == 'view_id') return false;
-		} else {
-			if ($sAttCode == 'view_id') return true;
-		}
+		if ($sAttCode == 'view_id') return !$this->oCollectionPlan->IsTeemIpZoneMgmtInstalled();
 
 		return parent::AttributeIsOptional($sAttCode);
 	}
@@ -114,19 +110,14 @@ class TeemIpDiscoveryIPv4Collector extends Collector
 	protected function GetRegisteredIps()
 	{
 		// Build OQL to retrieve IPs
-		$bStart = true;
-		$sOQL = "";
+		$aSubnetsToDiscover = [];
+		$sOQL = 'SELECT IPv4Address WHERE subnet_ip IN (%s)';
 		foreach ($this->aIPv4SubnetsList as $sSubnetIp => $aIPv4Subnet) {
 			if ($aIPv4Subnet['ipdiscovery_enabled'] == 'yes') {
-				if ($bStart) {
-					$sOQL = "SELECT IPv4Address WHERE subnet_ip IN ('".$sSubnetIp."'";
-					$bStart = false;
-				} else {
-					$sOQL .= ", '".$sSubnetIp."'";
-				}
+				$aSubnetsToDiscover[] = sprintf("'%s'", $sSubnetIp);
 			}
 		}
-		$sOQL .= ")";
+		$sOQL = sprintf($sOQL, implode(',', $aSubnetsToDiscover));
 
 		// Get IPs
 		$bResult = true;
@@ -159,7 +150,7 @@ class TeemIpDiscoveryIPv4Collector extends Collector
 						$this->aIPv4[$sIp]['synchro_data']['responds_to_iplookup'] = $aIPAttributes['responds_to_iplookup'];
 						$this->aIPv4[$sIp]['synchro_data']['fqdn_from_iplookup'] = $aIPAttributes['fqdn_from_iplookup'];
 						$this->aIPv4[$sIp]['synchro_data']['responds_to_scan'] = $aIPAttributes['responds_to_scan'];
-						$this->aIPv4[$sIp]['has_changed'] = false;
+						$this->aIPv4[$sIp]['has_changed'] = 'no';
 
 						Utils::Log(LOG_DEBUG, "IP: ".$sIp);
 					}
@@ -667,7 +658,7 @@ class TeemIpDiscoveryIPv4Collector extends Collector
 		// Filter IPs which status has not changed
 		$aFinalIPv4 = array();
 		foreach ($this->aIPv4 as $sIp => $aValue) {
-			if ($aValue['has_changed'] == true) {
+			if ($aValue['has_changed'] == 'yes') {
 				$aFinalIPv4[] = $aValue['synchro_data'];
 			}
 		}
