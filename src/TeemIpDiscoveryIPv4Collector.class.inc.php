@@ -150,7 +150,7 @@ class TeemIpDiscoveryIPv4Collector extends Collector
 						$this->aIPv4[$sIp]['synchro_data']['responds_to_iplookup'] = $aIPAttributes['responds_to_iplookup'];
 						$this->aIPv4[$sIp]['synchro_data']['fqdn_from_iplookup'] = $aIPAttributes['fqdn_from_iplookup'];
 						$this->aIPv4[$sIp]['synchro_data']['responds_to_scan'] = $aIPAttributes['responds_to_scan'];
-						$this->aIPv4[$sIp]['has_changed'] = false;
+						$this->aIPv4[$sIp]['has_changed'] = 'no';
 
 						Utils::Log(LOG_DEBUG, "IP: ".$sIp);
 					}
@@ -658,7 +658,7 @@ class TeemIpDiscoveryIPv4Collector extends Collector
 		// Filter IPs which status has not changed
 		$aFinalIPv4 = array();
 		foreach ($this->aIPv4 as $sIp => $aValue) {
-			if ($aValue['has_changed'] == true) {
+			if ($aValue['has_changed'] == 'yes') {
 				$aFinalIPv4[] = $aValue['synchro_data'];
 			}
 		}
