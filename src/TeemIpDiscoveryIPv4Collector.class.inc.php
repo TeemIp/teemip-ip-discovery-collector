@@ -96,11 +96,7 @@ class TeemIpDiscoveryIPv4Collector extends Collector
 	 */
 	public function AttributeIsOptional($sAttCode)
 	{
-		if ($this->oCollectionPlan->IsTeemIpZoneMgmtInstalled()) {
-			if ($sAttCode == 'view_id') return false;
-		} else {
-			if ($sAttCode == 'view_id') return true;
-		}
+		if ($sAttCode == 'view_id') return !$this->oCollectionPlan->IsTeemIpZoneMgmtInstalled();
 
 		return parent::AttributeIsOptional($sAttCode);
 	}
