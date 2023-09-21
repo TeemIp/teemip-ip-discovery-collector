@@ -6,20 +6,9 @@
 
 class TeemIpDiscoveryIPv4SubnetCollector extends Collector
 {
-	protected $iIndex;
-	protected $oCollectionPlan;
-	protected $aIPv4Subnet;
-
-	/**
-	 * @throws \Exception
-	 */
-	public function __construct()
-	{
-		parent::__construct();
-
-		$this->iIndex = 0;
-		$this->aIPv4Subnet = array();
-	}
+	protected int $iIndex = 0;
+	protected TeemIpDiscoveryCollectionPlan $oCollectionPlan;
+	protected array $aIPv4Subnet = [];
 
 	/**
 	 * @inheritdoc
@@ -27,8 +16,6 @@ class TeemIpDiscoveryIPv4SubnetCollector extends Collector
 	public function Init(): void
 	{
 		parent::Init();
-
-		$this->iIndex = 0;
 
 		// Get a copy of the collection plan
 		$this->oCollectionPlan = TeemIpDiscoveryCollectionPlan::GetPlan();
