@@ -54,11 +54,7 @@ class TeemIpDiscoveryIPv4SubnetCollector extends Collector
 	 */
 	public function AttributeIsOptional($sAttCode)
 	{
-		if ($this->oCollectionPlan->IsTeemIpIPRequestMgmtInstalled()) {
-			if ($sAttCode == 'allow_automatic_ip_creation') return false;
-		} else {
-			if ($sAttCode == 'allow_automatic_ip_creation') return true;
-		}
+		if ($sAttCode == 'allow_automatic_ip_creation') return !$this->oCollectionPlan->IsTeemIpIPRequestMgmtInstalled();
 
 		return parent::AttributeIsOptional($sAttCode);
 	}
