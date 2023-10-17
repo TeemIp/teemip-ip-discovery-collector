@@ -1,4 +1,4 @@
-# ![](https://wiki.teemip.net/lib/exe/fetch.php?media=extensions:icons8-binoculars-48.png "") TeemIp IP Discovery - Collector
+# ![](https://wiki.teemip.net/lib/exe/fetch.php?media=extensions:picto_ipdiscoverydatacollector.png "") TeemIp IP Discovery - Collector
 
 TeemIp solution to discover IP addresses
 
