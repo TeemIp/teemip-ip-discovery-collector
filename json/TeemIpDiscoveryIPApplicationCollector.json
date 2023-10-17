@@ -5,7 +5,7 @@
 	"user_id": "$synchro_user$",
 	"notify_contact_id": "$contact_to_notify$",
 	"scope_class": "IPDiscovery",
-	"database_table_name": "synchro_data_ipapplication_$discovery_application_uuid$",
+	"database_table_name": "",
 	"scope_restriction": "",
 	"full_load_periodicity": "0",
 	"reconciliation_policy": "use_attributes",
