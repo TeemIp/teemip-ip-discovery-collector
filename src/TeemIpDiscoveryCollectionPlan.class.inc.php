@@ -390,10 +390,18 @@ class TeemIpDiscoveryCollectionPlan extends CollectionPlan
 				return $this->aDiscoveryApplication['UUID'];
 
 			case 'last_discovery_date':
-				return $this->aDiscoveryApplication['last_discovery_date'];
+				if (array_key_exists('last_discovery_date', $this->aDiscoveryApplication)) {
+					return $this->aDiscoveryApplication['last_discovery_date'];
+				} else {
+					return null;
+				}
 
 			case 'duration':
-				return $this->aDiscoveryApplication['duration'];
+				if (array_key_exists('duration', $this->aDiscoveryApplication)) {
+					return $this->aDiscoveryApplication['duration'];
+				} else {
+					return 0;
+				}
 
 			case 'params':
 				return $this->aDiscoveryApplication['params'];
