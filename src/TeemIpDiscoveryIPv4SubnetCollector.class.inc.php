@@ -6,20 +6,9 @@
 
 class TeemIpDiscoveryIPv4SubnetCollector extends Collector
 {
-	protected $iIndex;
-	protected $oCollectionPlan;
-	protected $aIPv4Subnet;
-
-	/**
-	 * @throws \Exception
-	 */
-	public function __construct()
-	{
-		parent::__construct();
-
-		$this->iIndex = 0;
-		$this->aIPv4Subnet = array();
-	}
+	protected int $iIndex = 0;
+	protected TeemIpDiscoveryCollectionPlan $oCollectionPlan;
+	protected array $aIPv4Subnet = [];
 
 	/**
 	 * @inheritdoc
@@ -27,8 +16,6 @@ class TeemIpDiscoveryIPv4SubnetCollector extends Collector
 	public function Init(): void
 	{
 		parent::Init();
-
-		$this->iIndex = 0;
 
 		// Get a copy of the collection plan
 		$this->oCollectionPlan = TeemIpDiscoveryCollectionPlan::GetPlan();
@@ -67,11 +54,7 @@ class TeemIpDiscoveryIPv4SubnetCollector extends Collector
 	 */
 	public function AttributeIsOptional($sAttCode)
 	{
-		if ($this->oCollectionPlan->IsTeemIpIPRequestMgmtInstalled()) {
-			if ($sAttCode == 'allow_automatic_ip_creation') return false;
-		} else {
-			if ($sAttCode == 'allow_automatic_ip_creation') return true;
-		}
+		if ($sAttCode == 'allow_automatic_ip_creation') return !$this->oCollectionPlan->IsTeemIpIPRequestMgmtInstalled();
 
 		return parent::AttributeIsOptional($sAttCode);
 	}
@@ -85,20 +68,20 @@ class TeemIpDiscoveryIPv4SubnetCollector extends Collector
 		//$aIPv4SubnetsList = TeemIpDiscoveryIPv4Collector::GetUpdatedSubnetList();
 		$aIPv4SubnetsList = $this->oCollectionPlan->GetSubnetsList('ipv4');
 
-		$index = 0;
 		foreach ($aIPv4SubnetsList as $sSubnetIp => $aIPv4Subnet) {
 			if ($aIPv4Subnet['ipdiscovery_enabled'] == 'yes') {
-				$this->aIPv4Subnet[$index]['ip'] = $sSubnetIp;
-				$this->aIPv4Subnet[$index]['org_id'] = $aIPv4Subnet['org_id'];
-				$this->aIPv4Subnet[$index]['ipconfig_id'] = $aIPv4Subnet['ipconfig_id'];
-				$this->aIPv4Subnet[$index]['last_discovery_date'] = $aIPv4Subnet['last_discovery_date'];
-				$this->aIPv4Subnet[$index]['ping_duration'] = $aIPv4Subnet['ping_duration'];
-				$this->aIPv4Subnet[$index]['ping_discovered'] = $aIPv4Subnet['ping_discovered'];
-				$this->aIPv4Subnet[$index]['iplookup_duration'] = $aIPv4Subnet['iplookup_duration'];
-				$this->aIPv4Subnet[$index]['iplookup_discovered'] = $aIPv4Subnet['iplookup_discovered'];
-				$this->aIPv4Subnet[$index]['scan_duration'] = $aIPv4Subnet['scan_duration'];
-				$this->aIPv4Subnet[$index]['scan_discovered'] = $aIPv4Subnet['scan_discovered'];
-				$index++;
+				$this->aIPv4Subnet[] = [
+					'primary_key' => $sSubnetIp,
+					'ip' => $sSubnetIp,
+					'org_id' => $aIPv4Subnet['org_id'],
+					'last_discovery_date' => $aIPv4Subnet['last_discovery_date'],
+					'ping_duration' => $aIPv4Subnet['ping_duration'],
+					'ping_discovered' => $aIPv4Subnet['ping_discovered'],
+					'iplookup_duration' => $aIPv4Subnet['iplookup_duration'],
+					'iplookup_discovered' => $aIPv4Subnet['iplookup_discovered'],
+					'scan_duration' => $aIPv4Subnet['scan_duration'],
+					'scan_discovered' => $aIPv4Subnet['scan_discovered'],
+				];
 			}
 		}
 
@@ -144,43 +127,10 @@ class TeemIpDiscoveryIPv4SubnetCollector extends Collector
 	/**
 	 * @inheritdoc
 	 */
-	protected function InitProcessBeforeSynchro(): void
-	{
-		// Create IPConfig mapping table
-		$this->oIPv4AddressIPConfigMapping = new LookupTable('SELECT IPConfig', array('org_id_friendlyname'));
-	}
-
-	/**
-	 * @inheritdoc
-	 */
-	protected function ProcessLineBeforeSynchro(&$aLineData, $iLineIndex)
-	{
-		if (!$this->oIPv4AddressIPConfigMapping->Lookup($aLineData, array('org_id'), 'ipconfig_id', $iLineIndex)) {
-			throw new IgnoredRowException('Unknown IP Config');
-		}
-	}
-
-	/**
-	 * @inheritdoc
-	 */
 	public function fetch()
 	{
 		if ($this->iIndex < count($this->aIPv4Subnet)) {
-			$aDatas = array();
-			$aDatas['primary_key'] = $this->aIPv4Subnet[$this->iIndex]['ip'];
-			$aDatas['ip'] = $this->aIPv4Subnet[$this->iIndex]['ip'];
-			$aDatas['org_id'] = $this->aIPv4Subnet[$this->iIndex]['org_id'];
-			$aDatas['ipconfig_id'] = $this->aIPv4Subnet[$this->iIndex]['ipconfig_id'];
-			$aDatas['last_discovery_date'] = $this->aIPv4Subnet[$this->iIndex]['last_discovery_date'];
-			$aDatas['ping_duration'] = $this->aIPv4Subnet[$this->iIndex]['ping_duration'];
-			$aDatas['ping_discovered'] = $this->aIPv4Subnet[$this->iIndex]['ping_discovered'];
-			$aDatas['iplookup_duration'] = $this->aIPv4Subnet[$this->iIndex]['iplookup_duration'];
-			$aDatas['iplookup_discovered'] = $this->aIPv4Subnet[$this->iIndex]['iplookup_discovered'];
-			$aDatas['scan_duration'] = $this->aIPv4Subnet[$this->iIndex]['scan_duration'];
-			$aDatas['scan_discovered'] = $this->aIPv4Subnet[$this->iIndex]['scan_discovered'];
-			$this->iIndex++;
-
-			return $aDatas;
+			return $this->aIPv4Subnet[$this->iIndex++];
 		}
 
 		return false;

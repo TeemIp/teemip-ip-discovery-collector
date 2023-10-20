@@ -111,9 +111,9 @@
     },
     {
       "attcode": "ipconfig_id",
-      "update": "1",
+      "update": "0",
       "reconcile": "0",
-      "update_policy": "master_unlocked",
+      "update_policy": "master_locked",
       "reconciliation_attcode": "",
       "finalclass": "SynchroAttExtKey"
     },

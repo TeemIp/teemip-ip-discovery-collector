@@ -181,7 +181,7 @@ class TeemIpDiscoveryCollectionPlan extends CollectionPlan
 						$aData = reset($aResult['objects']);
 						$aIPDiscoveryAttributes = $aData['fields'];
 
-						foreach ($aIPDiscoveryAttributes['ipv4subnets_list'] as $sSubnetKey => $aIPv4Subnet) {
+						foreach ($aIPDiscoveryAttributes['ipv4subnets_list'] as $aIPv4Subnet) {
 							$sIndex = $aIPv4Subnet['ip'];
 							if (array_key_exists('ipdiscovery_enabled', $aIPv4Subnet)) {
 								$aIPv4SubnetsList[$sIndex]['ipdiscovery_enabled'] = $aIPv4Subnet['ipdiscovery_enabled'];
