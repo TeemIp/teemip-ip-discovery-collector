@@ -8,7 +8,7 @@
 	"database_table_name": "",
 	"scope_restriction": "",
 	"full_load_periodicity": "0",
-	"reconciliation_policy": "use_attributes",
+	"reconciliation_policy": "use_primary_key",
 	"action_on_zero": "error",
 	"action_on_one": "update",
 	"action_on_multiple": "error",
@@ -227,7 +227,7 @@
 		{
 			"attcode": "uuid",
 			"update": "0",
-			"reconcile": "1",
+			"reconcile": "0",
 			"update_policy": "master_locked",
 			"finalclass": "SynchroAttribute"
 		}

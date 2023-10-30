@@ -180,6 +180,7 @@ class TeemIpDiscoveryCollectionPlan extends CollectionPlan
 						Utils::Log(LOG_INFO, "An IP Discovery Application with UUID ".$sApplicationUUID." has been found in iTop.");
 						$aData = reset($aResult['objects']);
 						$aIPDiscoveryAttributes = $aData['fields'];
+						$aIPDiscoveryAttributes['id'] = (int) $aData['key'];
 
 						foreach ($aIPDiscoveryAttributes['ipv4subnets_list'] as $aIPv4Subnet) {
 							$sIndex = $aIPv4Subnet['ip'];
@@ -386,6 +387,9 @@ class TeemIpDiscoveryCollectionPlan extends CollectionPlan
 	public function GetApplicationParam($sParam)
 	{
 		switch ($sParam) {
+			case 'id':
+				return $this->aDiscoveryApplication['params']['id'];
+				
 			case 'uuid':
 				return $this->aDiscoveryApplication['UUID'];
 

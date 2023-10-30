@@ -9,7 +9,7 @@ class TeemIpDiscoveryIPApplicationCollector extends Collector
 	const MAX_IP_APPS = 1;
 
 	protected $iIndex;
-	protected $oCollectionPlan;
+	protected TeemIpDiscoveryCollectionPlan $oCollectionPlan;
 
 	/**
 	 * @inheritdoc
@@ -87,18 +87,17 @@ class TeemIpDiscoveryIPApplicationCollector extends Collector
 
 	/**
 	 * @inheritdoc
+	 * @return array{ primary_key: int, last_discovery_date: string, duration:int }|false
 	 */
-	public function fetch()
+	public function Fetch()
 	{
 		if ($this->iIndex < static::MAX_IP_APPS) {
-			$aDatas = array();
-			$aDatas['primary_key'] = $this->oCollectionPlan->GetApplicationParam('uuid');
-			$aDatas['uuid'] = $this->oCollectionPlan->GetApplicationParam('uuid');
-			$aDatas['last_discovery_date'] = $this->oCollectionPlan->GetApplicationParam('last_discovery_date');
-			$aDatas['duration'] = $this->oCollectionPlan->GetApplicationParam('duration');
 			$this->iIndex++;
-
-			return $aDatas;
+			return [
+				'primary_key' => $this->oCollectionPlan->GetApplicationParam('id'),
+				'last_discovery_date' => $this->oCollectionPlan->GetApplicationParam('last_discovery_date'),
+				'duration' => $this->oCollectionPlan->GetApplicationParam('duration')
+			];
 		}
 
 		return false;
