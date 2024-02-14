@@ -602,8 +602,13 @@ class TeemIpDiscoveryIPv4Collector extends Collector
 	/**
 	 * @inheritdoc
 	 */
-	public function prepare()
+	public function Prepare()
 	{
+		$bRet = parent::Prepare();
+		if (!$bRet) {
+			return false;
+		}
+		
 		// check list of ubnets to discover
 		if (empty($this->aIPv4SubnetsList)) {
 			// Just exit if there are no subnet to scan.
