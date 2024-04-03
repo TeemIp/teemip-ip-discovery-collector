@@ -230,7 +230,7 @@ class TeemIpDiscoveryIPv4Collector extends Collector
 				Utils::Log(LOG_INFO, "Start to ping subnet: ".$sSubnetIp);
 
 				// fping if available
-				if (isset($sFpingCmd)) exec(sprintf('%s -r1 -t%d -ga %s %s', $sFpingCmd, $iTimeOut*1000, long2ip($iIp), long2ip($iBroadcastIp-1)), $aFPingResults);
+				if (isset($sFpingCmd)) exec(sprintf('%s -r1 -t%d -ga %s %s 2>&1', $sFpingCmd, $iTimeOut*1000, long2ip($iIp), long2ip($iBroadcastIp-1)), $aFPingResults);
 
 				while ($iIp < $iBroadcastIp) {
 					$sIp = long2ip($iIp);
