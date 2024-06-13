@@ -24,8 +24,6 @@
 	</collectors_launch_sequence>
 
 	<!-- Synchronization parameters -->
-	<contact_to_notify></contact_to_notify>
-	<synchro_user></synchro_user>
 	<json_placeholders>
 		<!-- IP Discovery Application UUID -->
 		<discovery_application_uuid>0123_4567_89AB_CDEF</discovery_application_uuid>
