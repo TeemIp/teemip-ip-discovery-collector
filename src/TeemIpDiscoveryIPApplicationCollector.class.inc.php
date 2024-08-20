@@ -1,14 +1,13 @@
 <?php
 /*
- * @copyright   Copyright (C) 2023 TeemIp
+ * @copyright   Copyright (C) 2010-2024 TeemIp
  * @license     http://opensource.org/licenses/AGPL-3.0
  */
 
 class TeemIpDiscoveryIPApplicationCollector extends Collector
 {
 	const MAX_IP_APPS = 1;
-
-	protected $iIndex;
+	protected int $iIndex;
 	protected TeemIpDiscoveryCollectionPlan $oCollectionPlan;
 
 	/**

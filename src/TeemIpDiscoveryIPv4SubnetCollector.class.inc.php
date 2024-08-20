@@ -1,6 +1,6 @@
 <?php
 /*
- * @copyright   Copyright (C) 2023 TeemIp
+ * @copyright   Copyright (C) 2010-2024 TeemIp
  * @license     http://opensource.org/licenses/AGPL-3.0
  */
 
@@ -52,7 +52,7 @@ class TeemIpDiscoveryIPv4SubnetCollector extends Collector
 	/**
 	 * @inheritdoc
 	 */
-	public function AttributeIsOptional($sAttCode)
+	public function AttributeIsOptional($sAttCode): bool
 	{
 		if ($sAttCode == 'allow_automatic_ip_creation') return !$this->oCollectionPlan->IsTeemIpIPRequestMgmtInstalled();
 
@@ -62,7 +62,7 @@ class TeemIpDiscoveryIPv4SubnetCollector extends Collector
 	/**
 	 * @return void
 	 */
-	private function GetSubnets()
+	private function GetSubnets(): void
 	{
 		// Read updated subnet list from discovery activity that just took place
 		//$aIPv4SubnetsList = TeemIpDiscoveryIPv4Collector::GetUpdatedSubnetList();
@@ -90,7 +90,7 @@ class TeemIpDiscoveryIPv4SubnetCollector extends Collector
 	/**
 	 * @inheritdoc
 	 */
-	public function Prepare()
+	public function Prepare(): bool
 	{
 		$bRet = parent::Prepare();
 		if (!$bRet) {
@@ -127,7 +127,7 @@ class TeemIpDiscoveryIPv4SubnetCollector extends Collector
 	/**
 	 * @inheritdoc
 	 */
-	public function fetch()
+	public function fetch(): mixed
 	{
 		if ($this->iIndex < count($this->aIPv4Subnet)) {
 			return $this->aIPv4Subnet[$this->iIndex++];

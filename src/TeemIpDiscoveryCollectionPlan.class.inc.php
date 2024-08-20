@@ -1,6 +1,6 @@
 <?php
 /*
- * @copyright   Copyright (C) 2023 TeemIp
+ * @copyright   Copyright (C) 2010-2024 TeemIp
  * @license     http://opensource.org/licenses/AGPL-3.0
  */
 
@@ -8,13 +8,13 @@ require_once(APPROOT.'core/collectionplan.class.inc.php');
 
 class TeemIpDiscoveryCollectionPlan extends CollectionPlan
 {
-	private $bTeemIpIsInstalled;
-	private $bTeemIpIpDiscoveryIsInstalled;
-	private $bTeemIpNMEIsInstalled;
-	private $bTeemIpZoneMgmtIsInstalled;
-	private $bTeemIpIPRequestMgmtIsInstalled;
-	private $aDiscoveryApplication;
-	private $aIPv4SubnetsList;
+	private bool $bTeemIpIsInstalled;
+	private bool $bTeemIpIpDiscoveryIsInstalled;
+	private bool $bTeemIpNMEIsInstalled;
+	private bool $bTeemIpZoneMgmtIsInstalled;
+	private bool $bTeemIpIPRequestMgmtIsInstalled;
+	private array $aDiscoveryApplication;
+	private array $aIPv4SubnetsList;
 
 	/**
 	 * @inheritdoc
@@ -384,7 +384,7 @@ class TeemIpDiscoveryCollectionPlan extends CollectionPlan
 	 * @param $sParam
 	 * @return array|string
 	 */
-	public function GetApplicationParam($sParam)
+	public function GetApplicationParam($sParam): mixed
 	{
 		switch ($sParam) {
 			case 'id':

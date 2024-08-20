@@ -1,6 +1,6 @@
 <?php
 /*
- * @copyright   Copyright (C) 2023 TeemIp
+ * @copyright   Copyright (C) 2010-2024 TeemIp
  * @license     http://opensource.org/licenses/AGPL-3.0
  */
 
@@ -477,7 +477,7 @@ class TeemIpDiscoveryIPv4Collector extends Collector
 						}
 						Utils::Log(LOG_DEBUG, "DHCP ".$sIp." has not been scanned");
 					} else {
-
+                        $ScanResult = false;
 						switch ($this->aIPDiscoveryAttributes['protocol']) {
 							// Notes:
 							//  - @ removes information given by fsockopen when there is a connection problem.
@@ -730,7 +730,7 @@ class TeemIpDiscoveryIPv4Collector extends Collector
 	/**
 	 * @inheritdoc
 	 */
-	public function fetch()
+	public function fetch(): mixed
 	{
 		if ($this->iIndex < count($this->aIPv4)) {
 			$aDatas = $this->aIPv4[$this->iIndex];
