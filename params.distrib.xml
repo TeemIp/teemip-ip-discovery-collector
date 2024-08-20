@@ -30,6 +30,12 @@
 		<!-- Name of synchronization data sources -->
 		<ipv4_synchro_name>TeemIp IPv4 Discovery</ipv4_synchro_name>
 		<subnetv4_synchro_name>TeemIp IPv4 Subnet Discovery</subnetv4_synchro_name>
+		<!-- Following policy may be: write_if_empty, master_locked or master_unlocked
+			. Use write_if_empty if you want the collector to initialize the IP's status but let you edit it in TeemIp after the initial creation of the IP
+	        . Use master_locked if you manage the IP's status from the collector only. It will appear as 'read only' in TeemIp.
+	        . Use master_unlock if you want the IP's status to be set from the collector and still allow modifications from TeemIp
+		    -->
+		<ip_status_update_policy>write_if_empty</ip_status_update_policy>
 	</json_placeholders>
 
 	<!-- IP Addresses Parameters -->

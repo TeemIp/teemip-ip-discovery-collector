@@ -191,7 +191,7 @@
       "attcode": "status",
       "update": "1",
       "reconcile": "0",
-      "update_policy": "master_unlocked",
+      "update_policy": "$ip_status_update_policy$",
       "finalclass": "SynchroAttribute"
     },
     {
