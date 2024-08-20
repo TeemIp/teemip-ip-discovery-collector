@@ -6,17 +6,19 @@
 
 class TeemIpDiscoveryIPv4Collector extends Collector
 {
-	protected $iIndex;
-	protected $sIPDefaultStatus;
-	protected $sIPDefaultView;
-	protected $sPingPath;
-	protected $sFpingPath;
-	protected $bFpingEnable;
-	protected $sDigPath;
-	protected $aIPv4;
-	protected $oCollectionPlan;
-	protected $aIPDiscoveryAttributes;
-	protected $aIPv4SubnetsList;
+	protected int $iIndex;
+    protected string $bSetStatusOnRegisteredIPs;
+	protected string $sIPDefaultStatus;
+	protected string $sIPDefaultView;
+	protected string $sPingPath;
+	protected string $sFpingPath;
+	protected string $bFpingEnable;
+	protected string $sDigPath;
+	protected array $aIPv4;
+	protected CollectionPlan $oCollectionPlan;
+	protected array $aIPDiscoveryAttributes;
+	protected array $aIPv4SubnetsList;
+    protected LookupTable $oIPv4AddressIPConfigMapping;
 
 	/**
 	 * @inheritdoc
@@ -26,6 +28,7 @@ class TeemIpDiscoveryIPv4Collector extends Collector
 		parent::Init();
 
 		$this->iIndex = 0;
+        $this->bSetStatusOnRegisteredIPs = Utils::GetConfigurationValue('set_status_on_already_registered_ips', 'no');
 		$this->sIPDefaultStatus = Utils::GetConfigurationValue('ip_default_status', 'unassigned');
 		$this->sIPDefaultView = Utils::GetConfigurationValue('ip_default_view', '');
 		$this->sPingPath = Utils::GetConfigurationValue('ping_absolute_path', '');
@@ -254,7 +257,10 @@ class TeemIpDiscoveryIPv4Collector extends Collector
 								// Change data anyway as time stamp changes
 								$this->aIPv4[$sIp]['synchro_data']['responds_to_ping'] = 'yes';
 								$this->aIPv4[$sIp]['synchro_data']['last_discovery_date'] = $sTimeStamp;
-								$this->aIPv4[$sIp]['has_changed'] = 'yes';
+                                if ($this->bSetStatusOnRegisteredIPs == 'yes') {
+                                    $this->aIPv4[$sIp]['synchro_data']['status'] = $this->sIPDefaultStatus;
+                                }
+                                $this->aIPv4[$sIp]['has_changed'] = 'yes';
 							} else {
 								$aValues = array(
 									'primary_key' => $sIp,
@@ -380,7 +386,10 @@ class TeemIpDiscoveryIPv4Collector extends Collector
 								$this->aIPv4[$sIp]['synchro_data']['responds_to_iplookup'] = 'yes';
 								$this->aIPv4[$sIp]['synchro_data']['fqdn_from_iplookup'] = $sName;
 								$this->aIPv4[$sIp]['synchro_data']['last_discovery_date'] = $sTimeStamp;
-								$this->aIPv4[$sIp]['has_changed'] = 'yes';
+                                if ($this->bSetStatusOnRegisteredIPs == 'yes') {
+                                    $this->aIPv4[$sIp]['synchro_data']['status'] = $this->sIPDefaultStatus;
+                                }
+                                $this->aIPv4[$sIp]['has_changed'] = 'yes';
 							} else {
 								$aValues = array(
 									'primary_key' => $sIp,
@@ -557,11 +566,13 @@ class TeemIpDiscoveryIPv4Collector extends Collector
 						} else {
 							// IP answers to scan
 							if (array_key_exists($sIp, $this->aIPv4)) {
-								if ($this->aIPv4[$sIp]['synchro_data']['responds_to_scan'] != 'yes') {
-									$this->aIPv4[$sIp]['synchro_data']['responds_to_scan'] = 'yes';
-									$this->aIPv4[$sIp]['has_changed'] = 'yes';
-									$this->aIPv4[$sIp]['synchro_data']['last_discovery_date'] = $sTimeStamp;
-								}
+                                // Change data anyway as time stamp changes
+								$this->aIPv4[$sIp]['synchro_data']['responds_to_scan'] = 'yes';
+                                $this->aIPv4[$sIp]['synchro_data']['last_discovery_date'] = $sTimeStamp;
+                                if ($this->bSetStatusOnRegisteredIPs == 'yes') {
+                                    $this->aIPv4[$sIp]['synchro_data']['status'] = $this->sIPDefaultStatus;
+                                }
+								$this->aIPv4[$sIp]['has_changed'] = 'yes';
 							} else {
 								$aValues = array(
 									'primary_key' => $sIp,

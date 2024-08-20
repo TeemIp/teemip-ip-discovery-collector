@@ -33,7 +33,11 @@
 	</json_placeholders>
 
 	<!-- IP Addresses Parameters -->
+	<!-- Set the status on IPs that are already registered in TeemIP and that are seen as active by the collector -->
+	<set_status_on_already_registered_ips>no</set_status_on_already_registered_ips>
+	<!-- Status to be set on discovered IP -->
 	<ip_default_status>unassigned</ip_default_status>
+	<!-- Default DNS view to be set on newly discovered IPs in the case where teemip-zone-mgmt extension is used -->
 	<ip_default_view></ip_default_view>
 
 	<!-- Absolute path for ping command - "ping" will be executed with no path if not provided-->
@@ -46,6 +50,6 @@
 	<!-- fping usage may be disabled here -->
 	<fping_enable>yes</fping_enable>
 
-	<!-- @see https://github.com/Combodo/itop-data-collector-base/pull/54 -->
+	<!-- Date format - @see https://github.com/Combodo/itop-data-collector-base/pull/54 -->
 	<date_format>Y-m-d H:i:s</date_format>
 </parameters>
