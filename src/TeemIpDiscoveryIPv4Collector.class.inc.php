@@ -207,7 +207,7 @@ class TeemIpDiscoveryIPv4Collector extends Collector
 		if (($this->bFpingEnable != 'yes') || ($iStatus == 127)) {
 			exec($this->sPingPath.'ping -V', $aOutput, $iStatus);
 			if ($iStatus == 127) {
-				Utils::Log(LOG_ERR, "Ping command or fping command not found");
+				Utils::Log(LOG_ERR, "Ping command and fping command not found");
 					return;
 			} else $sPingCmd = $this->sPingPath.'ping';
 		} else $sFpingCmd = $this->sFpingPath.'fping';
