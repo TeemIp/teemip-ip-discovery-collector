@@ -15,7 +15,7 @@ class TeemIpDiscoveryIPv4Collector extends Collector
 	protected string $bFpingEnable;
 	protected string $sDigPath;
 	protected array $aIPv4;
-	protected CollectionPlan $oCollectionPlan;
+	protected TeemIpDiscoveryCollectionPlan $oCollectionPlan;
 	protected array $aIPDiscoveryAttributes;
 	protected array $aIPv4SubnetsList;
     protected LookupTable $oIPv4AddressIPConfigMapping;
@@ -69,6 +69,22 @@ class TeemIpDiscoveryIPv4Collector extends Collector
 		}
 
 		return true;
+	}
+
+	/**
+	 * Add URLs for icon and application
+	 *
+	 * @param array $aPlaceHolders
+	 * @throws Exception
+	 */
+	public function GetSynchroDataSourceDefinition($aPlaceHolders = []): false|string
+	{
+		$sUrl = Utils::GetConfigurationValue('itop_url');
+
+		$aPlaceHolders['$url_application$'] = sprintf('%s/pages/UI.php?operation=details&class=IPDiscovery&id=%d', $sUrl, $this->oCollectionPlan->GetApplicationParam('id'));
+		$aPlaceHolders['$url_icon$'] = sprintf('%s/env-production/teemip-ip-discovery/asset/img/icons8-binoculars-48.png', $sUrl);
+
+		return parent::GetSynchroDataSourceDefinition($aPlaceHolders);
 	}
 
 	/**

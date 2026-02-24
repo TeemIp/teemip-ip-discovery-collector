@@ -50,6 +50,22 @@ class TeemIpDiscoveryIPv4SubnetCollector extends Collector
 	}
 
 	/**
+	 * Add URLs for icon and application
+	 *
+	 * @param array $aPlaceHolders
+	 * @throws Exception
+	 */
+	public function GetSynchroDataSourceDefinition($aPlaceHolders = []): false|string
+	{
+		$sUrl = Utils::GetConfigurationValue('itop_url');
+
+		$aPlaceHolders['$url_application$'] = sprintf('%s/pages/UI.php?operation=details&class=IPDiscovery&id=%d', $sUrl, $this->oCollectionPlan->GetApplicationParam('id'));
+		$aPlaceHolders['$url_icon$'] = sprintf('%s/env-production/teemip-ip-discovery/asset/img/icons8-binoculars-48.png', $sUrl);
+
+		return parent::GetSynchroDataSourceDefinition($aPlaceHolders);
+	}
+
+	/**
 	 * @inheritdoc
 	 */
 	public function AttributeIsOptional($sAttCode): bool
